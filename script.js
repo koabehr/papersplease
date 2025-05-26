@@ -22,14 +22,25 @@ function updateChecklist(country) {
     });
 }
 
+let checkboxCounter = 0; // to ensure unique IDs
+
 function addCheckbox(labelText) {
-    const label = document.createElement('label');
-    label.style.display = 'block'; // makes each checkbox appear on its own line
+    const wrapper = document.createElement('div');
+    wrapper.className = 'checkbox-wrapper-47';
+
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode(' ' + labelText));
-    checklist.appendChild(label);
+    const checkboxId = 'cb-' + checkboxCounter++;
+    checkbox.id = checkboxId;
+    checkbox.name = 'cb';
+
+    const label = document.createElement('label');
+    label.htmlFor = checkboxId;
+    label.textContent = labelText;
+
+    wrapper.appendChild(checkbox);
+    wrapper.appendChild(label);
+    checklist.appendChild(wrapper);
 }
 
 // Initial load
