@@ -5,10 +5,7 @@ function updateChecklist(country) {
     checklist.innerHTML = ''; // Clear current list
 
     // Always present
-    const baseItems = ['Passport', 'Polio Vaccine'];
-    baseItems.forEach(item => {
-        addCheckbox(item);
-    });
+    const items = ['Passport', 'Polio Vaccine'];
 
     // Conditional
     if (country && country !== "Country") {
@@ -17,10 +14,17 @@ function updateChecklist(country) {
         } else {
             items.push("Access Permit");
         }
+    }
+
+    // Add checkboxes
+    items.forEach(item => {
+        addCheckbox(item);
+    });
 }
 
 function addCheckbox(labelText) {
     const label = document.createElement('label');
+    label.style.display = 'block'; // makes each checkbox appear on its own line
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     label.appendChild(checkbox);
