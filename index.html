@@ -1,11 +1,33 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Papers, Please Helper</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Papers, Please</h1>
-    <p>An unofficial helper/cheat sheet for Papers, Please!</p>
+    <div class="sidebar">
+        <select id="countryDropdown">
+            <option value="Arstotzka">Arstotzka</option>
+            <option value="Antegria">Antegria</option>
+            <option value="Impor">Impor</option>
+            <option value="Kolechia">Kolechia</option>
+            <option value="Obristan">Obristan</option>
+            <option value="Republia">Republia</option>
+            <option value="United Federation">United Federation</option>
+        </select>
+
+        <div id="checklist">
+            <!-- Checklist items will be inserted here -->
+        </div>
+    </div>
+
+    <div class="main">
+        <h1>Papers, Please</h1>
+        <p>An unofficial helper/cheat sheet for Papers, Please!</p>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
