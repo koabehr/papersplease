@@ -11,11 +11,12 @@ function updateChecklist(country) {
     });
 
     // Conditional
-    if (country === 'Arstotzka') {
-        addCheckbox('ID');
-    } else {
-        addCheckbox('Access Permit');
-    }
+    if (country && country !== "Country") {
+        if (country === "Arstotzka") {
+            items.push("ID");
+        } else {
+            items.push("Access Permit");
+        }
 }
 
 function addCheckbox(labelText) {
