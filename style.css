@@ -44,3 +44,22 @@ body {
     padding: 20px;
     text-align: center;
 }
+
+#countryDropdown {
+    width: 100%;
+    padding: 0.5em;
+    text-align: center;
+    text-align-last: center; /* Center selected item */
+    font-size: 1em;
+    border: none;
+    background: #222;
+    color: white;
+    margin-bottom: 1em;
+  }
+  
+  /* Make the placeholder ("Country") italic and transparent */
+  #countryDropdown option[value="Country"] {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
