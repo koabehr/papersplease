@@ -33,13 +33,6 @@ body {
     gap: 8px;
 }
 
-#checklist label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-}
-
 .main {
     flex: 1;
     padding: 20px;
@@ -68,7 +61,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    font-size: 1.5em; /* adjust size as needed */
+    font-size: 2em; /* adjust size as needed */
   }
   
   .checkbox-wrapper-47 input[type="checkbox"] {
@@ -98,6 +91,7 @@ body {
     border: 2px solid #9098A9;
     border-radius: 6px;
     z-index: -1;
+    margin-right: 0.5em;
   }
   
   .checkbox-wrapper-47 input[type=checkbox]:checked + label {
