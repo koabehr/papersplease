@@ -30,12 +30,11 @@ function addCheckbox(labelText) {
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    const checkboxId = 'cb-' + checkboxCounter++;
-    checkbox.id = checkboxId;
-    checkbox.name = 'cb';
+    const id = 'cb-' + labelText.replace(/\s+/g, '-').toLowerCase(); // unique ID
+    checkbox.id = id;
 
     const label = document.createElement('label');
-    label.htmlFor = checkboxId;
+    label.htmlFor = id;
     label.textContent = labelText;
 
     wrapper.appendChild(checkbox);
