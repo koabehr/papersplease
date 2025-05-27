@@ -145,10 +145,10 @@ body {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* left align content */
     justify-content: flex-start;
     width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
 /* Title and description styles */
@@ -170,7 +170,7 @@ body {
 .info-box {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* left align infobox */
     gap: 12px;
     background-color: black;
     border-radius: 8px;
@@ -202,7 +202,7 @@ body {
 
 /* Infobox checklist styles */
 .passport-checklist {
-    font-size: 0.9em;
+    font-size: 0.7em; /* much smaller */
     margin-top: 10px;
 }
 
@@ -227,4 +227,12 @@ body {
         transform: none;
         align-items: center;
     }
+}
+
+.center-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1em;
 }

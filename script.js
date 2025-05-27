@@ -119,40 +119,44 @@ function updatePassportBox(country) {
 
 // Infobox checklist logic
 function setupInfoboxChecklist() {
-  const infoCheckboxIds = ['name', 'dob', 'sex', 'city', 'exp', 'face'];
-  const infoCheckboxes = infoCheckboxIds.map(id => document.getElementById(id));
-
-  infoCheckboxes.forEach(cb => {
-    cb.addEventListener('change', () => {
-      const allChecked = infoCheckboxes.every(c => c.checked);
-
-      if (allChecked) {
-        // Find the static Passport checkbox under Documents
-        const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
-        if (passportSidebarCheckbox) passportSidebarCheckbox.checked = true;
-        passportBox.classList.add('hidden');
-        infoCheckboxes.forEach(c => (c.checked = false));
-      }
+    const infoCheckboxIds = ['name', 'dob', 'sex', 'city', 'exp', 'face'];
+    const infoCheckboxes = infoCheckboxIds.map(id => document.getElementById(id));
+  
+    infoCheckboxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        const allChecked = infoCheckboxes.every(c => c.checked);
+  
+        if (allChecked) {
+          // Find the static Passport checkbox under Documents
+          const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
+          if (passportSidebarCheckbox) passportSidebarCheckbox.checked = true;
+          passportBox.classList.add('hidden');
+          infoCheckboxes.forEach(c => (c.checked = false));
+        }
+      });
     });
-  });
-}
+  }
 
 // Initialize checklist and dropdown logic
 dropdown.addEventListener('change', () => {
-  const country = dropdown.value;
-
-  if (country === 'Country') {
+    const country = dropdown.value;
+  
+    if (country === 'Country') {
+      passportBox.classList.add('hidden');
+      reasonsSection.style.display = 'none';
+      checklistReasons.innerHTML = '';
+    } else {
+      updatePassportBox(country);
+      reasonsSection.style.display = '';
+      updateChecklistReasons();
+    }
+  
+    updateChecklistDocuments(country, selectedReason);
+    setupInfoboxChecklist();
+  });
+  
+  document.addEventListener('DOMContentLoaded', () => {
     passportBox.classList.add('hidden');
-  } else {
-    updatePassportBox(country);
-  }
-
-  updateChecklistDocuments(country, selectedReason);
-  setupInfoboxChecklist();
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  updateChecklistReasons();
-  updateChecklistDocuments(dropdown.value, selectedReason);
-  setupInfoboxChecklist();
-});
+    reasonsSection.style.display = 'none';
+    updateChecklistDocuments(dropdown.value, selectedReason);
+  });
