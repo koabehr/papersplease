@@ -7,21 +7,6 @@ html {
     box-sizing: border-box;
 }
 
-/* Title and description styles */
-#main-title {
-    text-align: center;
-    font-size: 3em;
-    margin: 0.5em 0;
-    color: white;
-}
-
-#main-description {
-    text-align: center;
-    font-size: 1.5em;
-    margin-bottom: 1em;
-    color: rgba(255, 255, 255, 0.8);
-}
-
 body {
     margin: 0;
     display: flex;
@@ -31,6 +16,11 @@ body {
     color: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hide utility */
+.hidden {
+    display: none !important;
 }
 
 /* Sidebar styles */
@@ -80,7 +70,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    font-size: 1.4em;
+    font-size: 1.1em;
 }
 
 .checkbox-wrapper-47 input[type="checkbox"] {
@@ -145,30 +135,42 @@ body {
     text-align: center;
     font-size: 1.4em;
     letter-spacing: 0.05em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-/* Center title and description on the page */
 .main-content-wrapper {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically */
-    height: 100%; /* Take full height of the main content */
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
     text-align: center;
 }
 
-/* Infobox checklist styles */
-.passport-checklist {
-    font-size: 0.9em; /* Reduced font size */
-    margin-top: 10px;
+/* Title and description styles */
+#main-title {
+    text-align: center;
+    font-size: 3em;
+    margin: 0.5em 0;
+    color: white;
 }
 
-/* Infobox layout adjustments */
+#main-description {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Info box styles */
 .info-box {
     display: flex;
-    flex-direction: column; /* Stack content vertically */
-    align-items: center; /* Center-align content */
+    flex-direction: column;
+    align-items: center;
     gap: 12px;
     background-color: black;
     border-radius: 8px;
@@ -183,7 +185,7 @@ body {
 
 .info-box-icon {
     flex-shrink: 0;
-    margin-bottom: 10px; /* Add spacing below the image */
+    margin-bottom: 10px;
 }
 
 .info-box-title {
@@ -196,6 +198,12 @@ body {
     margin-top: 4px;
     line-height: 1.4em;
     text-align: center;
+}
+
+/* Infobox checklist styles */
+.passport-checklist {
+    font-size: 0.9em;
+    margin-top: 10px;
 }
 
 /* Responsive styles */

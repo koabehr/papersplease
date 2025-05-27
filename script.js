@@ -5,7 +5,6 @@ const passportBox = document.getElementById('passportBox');
 const passportTitle = document.getElementById('passportTitle');
 const passportImage = document.getElementById('passportImage');
 const passportCities = document.getElementById('passportCities');
-const passportCheckbox = document.getElementById('passportCheckbox');
 
 // Static checklist items
 const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos'];
@@ -25,10 +24,10 @@ const passportData = {
   },
   Kolechia: {
     title: 'Kolechian Passport',
-    photo: 'kolechian-passport.png',
+    photo: 'https://static.wikia.nocookie.net/papersplease/images/7/7a/PassportOuterKolechia.png/revision/latest?cb=20130624094204',
     cities: ['Vedor', 'West Grestin', 'Yurko City']
   }
-  // Add other countries similarly
+  // Add other countries as needed
 };
 
 let selectedReason = null;
@@ -89,6 +88,7 @@ function addCheckbox(labelText, parent) {
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
   checkbox.id = `cb-${labelText.replace(/\s+/g, '-').toLowerCase()}`;
+  checkbox.dataset.label = labelText; // For easy lookup
 
   const label = document.createElement('label');
   label.setAttribute('for', checkbox.id);
@@ -101,50 +101,58 @@ function addCheckbox(labelText, parent) {
 
 // Update passport visuals and data
 function updatePassportBox(country) {
-    if (passportData[country]) {
-      passportBox.style.display = 'flex'; // Show the infobox
-      passportTitle.textContent = passportData[country].title;
-      passportImage.src = passportData[country].photo;
-  
-      passportCities.innerHTML = '';
-      passportData[country].cities.forEach(city => {
-        const li = document.createElement('li');
-        li.textContent = city;
-        passportCities.appendChild(li);
-      });
-    } else {
-      passportBox.style.display = 'none'; // Hide the infobox
-    }
-  }
+  if (passportData[country]) {
+    passportBox.classList.remove('hidden');
+    passportTitle.textContent = passportData[country].title;
+    passportImage.src = passportData[country].photo;
 
-// Auto-check passport and hide infobox
-document.addEventListener('DOMContentLoaded', () => {
-    const infoCheckboxIds = ['name', 'dob', 'sex', 'city', 'exp', 'face'];
-    const infoCheckboxes = infoCheckboxIds.map(id => document.getElementById(id));
-    const passportSidebarCheckbox = document.querySelector('#checklist-documents input[type="checkbox"][id="passportCheckbox"]');
-  
-    infoCheckboxes.forEach(cb => {
-      cb.addEventListener('change', () => {
-        const allChecked = infoCheckboxes.every(c => c.checked);
-  
-        if (allChecked) {
-          passportSidebarCheckbox.checked = true; // Mark the sidebar Passport checkbox
-          passportBox.style.display = 'none'; // Hide the infobox
-          infoCheckboxes.forEach(c => (c.checked = false)); // Reset infobox checkboxes
-        }
-      });
+    passportCities.innerHTML = '';
+    passportData[country].cities.forEach(city => {
+      const li = document.createElement('li');
+      li.textContent = city;
+      passportCities.appendChild(li);
+    });
+  } else {
+    passportBox.classList.add('hidden');
+  }
+}
+
+// Infobox checklist logic
+function setupInfoboxChecklist() {
+  const infoCheckboxIds = ['name', 'dob', 'sex', 'city', 'exp', 'face'];
+  const infoCheckboxes = infoCheckboxIds.map(id => document.getElementById(id));
+
+  infoCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const allChecked = infoCheckboxes.every(c => c.checked);
+
+      if (allChecked) {
+        // Find the static Passport checkbox under Documents
+        const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
+        if (passportSidebarCheckbox) passportSidebarCheckbox.checked = true;
+        passportBox.classList.add('hidden');
+        infoCheckboxes.forEach(c => (c.checked = false));
+      }
     });
   });
+}
 
 // Initialize checklist and dropdown logic
 dropdown.addEventListener('change', () => {
-    const country = dropdown.value;
-  
-    if (country === 'Country') {
-      passportBox.style.display = 'none'; // Hide infobox if no valid country is selected
-    } else {
-      updatePassportBox(country); // Show infobox for valid country
-    }
-  
-    updateChecklistDocuments(country, selectedReason);
-  });
+  const country = dropdown.value;
+
+  if (country === 'Country') {
+    passportBox.classList.add('hidden');
+  } else {
+    updatePassportBox(country);
+  }
+
+  updateChecklistDocuments(country, selectedReason);
+  setupInfoboxChecklist();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  updateChecklistReasons();
+  updateChecklistDocuments(dropdown.value, selectedReason);
+  setupInfoboxChecklist();
+});
