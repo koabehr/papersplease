@@ -130,11 +130,19 @@ body {
 
 .main {
     flex: 1;
-    padding: 20px 40px 60px; /* added bottom padding */
-    margin-left: 12.5%;
+    padding: 20px 40px 60px; /* good for spacing */
+    margin-left: 12.5%;       /* shifts content to make room for the sidebar */
     text-align: center;
     font-size: 1.4em;
     letter-spacing: 0.05em;
+}
+
+.main-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* horizontal centering for flex items */
+    transform: translateX(-6.25%);
+    text-align: center;
 }
 
 @media (max-width: 768px) {
