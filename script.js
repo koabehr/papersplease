@@ -132,25 +132,57 @@ dropdown.addEventListener('change', () => {
 
 // Logic to hide box when all checkboxes are ticked
 document.addEventListener('DOMContentLoaded', () => {
-  const passportCheckbox = document.getElementById('passportCheckbox');
-  const passportBox = document.getElementById('passportBox');
-
-  const checkboxes = [
-    'name',
-    'dob',
-    'sex',
-    'city',
-    'exp',
-    'face'
-  ].map(id => document.getElementById(id));
-
-  checkboxes.forEach(cb => {
-    cb.addEventListener('change', () => {
-      const allChecked = checkboxes.every(c => c.checked);
-      if (allChecked) {
-        passportCheckbox.checked = true;
+    const countryDropdown = document.getElementById('countryDropdown');
+    const passportBox = document.getElementById('passportBox');
+    const passportTitle = document.getElementById('passportTitle');
+    const passportImage = document.getElementById('passportImage');
+    const passportCities = document.getElementById('passportCities');
+    const passportCheckbox = document.getElementById('passportCheckbox');
+  
+    const infoCheckboxIds = ['name', 'dob', 'sex', 'city', 'exp', 'face'];
+    const infoCheckboxes = infoCheckboxIds.map(id => document.getElementById(id));
+  
+    const countriesData = {
+      Arstotzka: {
+        title: 'Arstotzka Passport',
+        image: 'https://static.wikia.nocookie.net/papersplease/images/2/2d/PassportOuterArstotzka.png/revision/latest?cb=20130624094123',
+        cities: ['Orvech Vonor', 'East Grestin', 'Paradizna'],
+      },
+      // Add other countries here...
+    };
+  
+    countryDropdown.addEventListener('change', () => {
+      const selectedCountry = countryDropdown.value;
+      const data = countriesData[selectedCountry];
+  
+      if (data) {
+        passportBox.style.display = 'flex';
+        passportTitle.textContent = data.title;
+        passportImage.src = data.image;
+        passportImage.alt = data.title;
+  
+        // Populate cities
+        passportCities.innerHTML = '';
+        data.cities.forEach(city => {
+          const li = document.createElement('li');
+          li.textContent = city;
+          passportCities.appendChild(li);
+        });
+  
+        // Uncheck all internal checkboxes
+        infoCheckboxes.forEach(cb => cb.checked = false);
+        passportCheckbox.checked = false;
+      } else {
         passportBox.style.display = 'none';
       }
     });
+  
+    // Auto-check passport if all internal boxes are checked
+    infoCheckboxes.forEach(cb => {
+      cb.addEventListener('change', () => {
+        const allChecked = infoCheckboxes.every(c => c.checked);
+        passportCheckbox.checked = allChecked;
+      });
+    });
   });
-});
+  

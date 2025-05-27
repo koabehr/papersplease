@@ -37,7 +37,7 @@
     <div class="checklist-section">
       <div class="checkbox-wrapper-47">
         <input type="checkbox" id="passportCheckbox" />
-        <label for="passportCheckbox">Passport Verified</label>
+        <label for="passportCheckbox">Passport</label>
       </div>
     </div>
   </div>
@@ -45,40 +45,44 @@
   <div class="main">
     <div class="main-content-wrapper">
       <div id="passportBox" class="info-box passport-box" style="display: none;">
-        <h2 id="passportTitle">Passport Title</h2>
-        <img id="passportImage" src="" alt="Passport Image" width="60" height="80" />
-        <p>Issuing Cities:</p>
-        <ul id="passportCities"></ul>
-
-        <div class="passport-checklist">
-          <div class="checkbox-wrapper-47">
-            <input type="checkbox" id="name" />
-            <label for="name">Name</label>
-          </div>
-          <div class="checkbox-wrapper-47">
-            <input type="checkbox" id="dob" />
-            <label for="dob">D.O.B.</label>
-          </div>
-          <div class="checkbox-wrapper-47">
-            <input type="checkbox" id="sex" />
-            <label for="sex">Sex</label>
-          </div>
-          <div class="checkbox-wrapper-47">
-            <input type="checkbox" id="city" />
-            <label for="city">Issued City</label>
-          </div>
-          <div class="checkbox-wrapper-47">
-            <input type="checkbox" id="exp" />
-            <label for="exp">Expiration</label>
-          </div>
-          <div class="checkbox-wrapper-47">
-            <input type="checkbox" id="face" />
-            <label for="face">Face</label>
+        <img id="passportImage" class="info-box-icon" src="" alt="Passport" width="60" height="80" />
+        <div>
+          <h3 id="passportTitle" class="info-box-title">Passport Title</h3>
+          <div class="info-box-text">
+            <span>Issuing Cities:</span>
+            <ul id="passportCities"></ul>
+          </div>          
+  
+          <div class="passport-checklist">
+            <div class="checkbox-wrapper-47">
+              <input type="checkbox" id="name" />
+              <label for="name">Name</label>
+            </div>
+            <div class="checkbox-wrapper-47">
+              <input type="checkbox" id="dob" />
+              <label for="dob">D.O.B.</label>
+            </div>
+            <div class="checkbox-wrapper-47">
+              <input type="checkbox" id="sex" />
+              <label for="sex">Sex</label>
+            </div>
+            <div class="checkbox-wrapper-47">
+              <input type="checkbox" id="city" />
+              <label for="city">Issued City</label>
+            </div>
+            <div class="checkbox-wrapper-47">
+              <input type="checkbox" id="exp" />
+              <label for="exp">Expiration</label>
+            </div>
+            <div class="checkbox-wrapper-47">
+              <input type="checkbox" id="face" />
+              <label for="face">Face</label>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </div>  
 
   <script src="script.js"></script>
 </body>
