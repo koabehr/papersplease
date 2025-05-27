@@ -231,6 +231,15 @@ body {
   align-items: flex-start;
 }
 
+.info-box-group {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   body {
