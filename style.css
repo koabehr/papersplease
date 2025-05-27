@@ -119,6 +119,8 @@ body {
     margin-left: 12.5%;
     box-sizing: border-box;
     text-align: center;
+    font-size: 1.4em;         /* Slightly larger text */
+    letter-spacing: 0.05em;   /* Add spacing between letters */
 }
 
 @media (max-width: 768px) {
