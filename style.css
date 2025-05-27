@@ -141,20 +141,16 @@ body {
 }
 
 .infobox {
-    position: relative;
-    margin: 20px auto 0 auto;
-    width: 180px;
-    height: 400px; /* Tall, not wide */
     background-color: black;
-    border: 2px solid white;
+    border: 1px solid white;
     color: white;
-    padding: 10px;
-    box-sizing: border-box;
+    padding: 15px;
+    width: 200px;
+    height: 350px;
+    margin-top: 20px;
+    margin-left: 0;
     text-align: left;
-    font-size: 1.1em;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    font-size: 1.2em;
 }
 
 .infobox h3 {
@@ -163,11 +159,4 @@ body {
     text-align: center;
     border-bottom: 1px solid white;
     padding-bottom: 5px;
-}
-
-.mini-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 1em;
 }
