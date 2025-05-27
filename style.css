@@ -139,3 +139,35 @@ body {
         padding: 10px;
     }
 }
+
+.infobox {
+    position: relative;
+    margin: 20px auto 0 auto;
+    width: 180px;
+    height: 400px; /* Tall, not wide */
+    background-color: black;
+    border: 2px solid white;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: left;
+    font-size: 1.1em;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.infobox h3 {
+    font-size: 1.2em;
+    margin: 0 0 10px;
+    text-align: center;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
+}
+
+.mini-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1em;
+}
