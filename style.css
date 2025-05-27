@@ -140,34 +140,38 @@ body {
     }
 }
 
-.info-box {
+.info-box-3 {
     display: flex;
     flex-direction: column;
     background-color: black;
     border: 1px solid white;
-    border-radius: 8px;
     color: white;
-    padding: 20px;
-    width: 220px;
-    height: 350px;
+    border-radius: 6px;
+    padding: 16px;
+    width: 240px; /* Fixed width */
     margin-top: 20px;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
-}
-
-.info-box-icon {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.05);
+  }
+  
+  .info-box-3-icon {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
-}
-
-.info-box-title {
-    font-size: 1.5em;
+    margin-bottom: 12px;
+  }
+  
+  .info-box-3-icon svg {
+    stroke: white;
+  }
+  
+  .info-box-3-title {
+    font-size: 1.2em;
     margin-bottom: 10px;
     text-align: center;
-}
-
-.info-box-text {
-    font-size: 1em;
+  }
+  
+  .info-box-3-content {
+    font-size: 0.95em;
+    line-height: 1.4em;
     text-align: center;
-}
+  }  
