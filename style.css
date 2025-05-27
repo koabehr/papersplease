@@ -7,6 +7,21 @@ html {
     box-sizing: border-box;
 }
 
+/* Title and description styles */
+#main-title {
+    text-align: center;
+    font-size: 3em;
+    margin: 0.5em 0;
+    color: white;
+}
+
+#main-description {
+    text-align: center;
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    color: rgba(255, 255, 255, 0.8);
+}
+
 body {
     margin: 0;
     display: flex;
