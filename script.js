@@ -5,6 +5,7 @@ const passportBox = document.getElementById('passportBox');
 const passportTitle = document.getElementById('passportTitle');
 const passportImage = document.getElementById('passportImage');
 const passportCities = document.getElementById('passportCities');
+const polioBox = document.getElementById('polioBox');
 
 // Static checklist items
 const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos'];
@@ -166,11 +167,21 @@ function setupInfoboxChecklist() {
   }
 }
 
+// Show/hide Polio Vaccine infobox based on country selection
+function updatePolioBox(country) {
+  if (country && country !== 'Country') {
+    polioBox.classList.remove('hidden');
+  } else {
+    polioBox.classList.add('hidden');
+  }
+}
+
 // Dropdown change logic
 dropdown.addEventListener('change', () => {
   const country = dropdown.value;
   updateChecklistDocuments(country, selectedReason);
   updateChecklistReasons(country);
+  updatePolioBox(country);
   if (country === 'Country') {
     passportBox.classList.add('hidden');
     selectedReason = null;
@@ -180,9 +191,10 @@ dropdown.addEventListener('change', () => {
   }
 });
 
-// On load: show titles, hide checklists
+// On load: show titles, hide checklists and infoboxes
 document.addEventListener('DOMContentLoaded', () => {
   checklistDocuments.classList.add('hidden');
   checklistReasons.classList.add('hidden');
   passportBox.classList.add('hidden');
+  polioBox.classList.add('hidden');
 });
