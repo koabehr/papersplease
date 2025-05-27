@@ -95,3 +95,38 @@ updateChecklistDocuments(dropdown.value, selectedReason);
 dropdown.addEventListener('change', () => {
   updateChecklistDocuments(dropdown.value, selectedReason);
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const countryDropdown = document.getElementById('countryDropdown');
+  const arstotzkaBox = document.getElementById('passport-ars');
+  const passportCheckbox = document.getElementById('passportCheckboxArstotzka');
+
+  const checkboxes = [
+    'ars-name',
+    'ars-dob',
+    'ars-sex',
+    'ars-issued',
+    'ars-exp',
+    'ars-face'
+  ].map(id => document.getElementById(id));
+
+  // Show infobox if Arstotzka selected
+  countryDropdown.addEventListener('change', () => {
+    if (countryDropdown.value === 'Arstotzka') {
+      arstotzkaBox.style.display = 'block';
+    } else {
+      arstotzkaBox.style.display = 'none';
+    }
+  });
+
+  // Auto-check sidebar box & hide infobox when all are checked
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const allChecked = checkboxes.every(c => c.checked);
+      if (allChecked) {
+        passportCheckbox.checked = true;
+        arstotzkaBox.style.display = 'none';
+      }
+    });
+  });
+});
