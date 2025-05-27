@@ -46,6 +46,16 @@ function updateChecklistDocuments(country, reason) {
     items.push(...reasonMap[reason]);
   }
   items.forEach(item => addCheckbox(item, checklistDocuments));
+
+  // Add event listener to Passport checkbox to hide infobox if checked
+  const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
+  if (passportSidebarCheckbox) {
+    passportSidebarCheckbox.addEventListener('change', () => {
+      if (passportSidebarCheckbox.checked) {
+        passportBox.classList.add('hidden');
+      }
+    });
+  }
 }
 
 // Update checklist reasons
@@ -134,6 +144,16 @@ function setupInfoboxChecklist() {
       }
     });
   });
+
+  // Also hide infobox if the passport checkbox is checked directly
+  const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
+  if (passportSidebarCheckbox) {
+    passportSidebarCheckbox.addEventListener('change', () => {
+      if (passportSidebarCheckbox.checked) {
+        passportBox.classList.add('hidden');
+      }
+    });
+  }
 }
 
 // Dropdown change logic
