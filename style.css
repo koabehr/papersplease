@@ -5,6 +5,7 @@ body {
     background: grey;
     font-family: 'VT323', monospace;
     color: white;
+    font-size: 1.0em;
 }
 
 .sidebar {
@@ -44,7 +45,7 @@ body {
     padding: 0.5em;
     text-align: center;
     text-align-last: center; /* Center selected item */
-    font-size: 1em;
+    font-size: 1.0em;
     border: none;
     background: #222;
     color: white;
