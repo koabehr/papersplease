@@ -1,3 +1,12 @@
+/* Global box-sizing for consistent layout */
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     display: flex;
@@ -5,6 +14,8 @@ body {
     background: grey;
     font-family: 'VT323', monospace;
     color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .sidebar {
@@ -12,10 +23,10 @@ body {
     background: #111;
     color: white;
     padding: 20px 10px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    flex-wrap: wrap;
 }
 
 .sidebar select {
@@ -24,6 +35,13 @@ body {
     background-color: #222;
     color: white;
     border: 1px solid #444;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.sidebar select:hover,
+.sidebar select:focus {
+    border-color: #888;
+    background-color: #333;
 }
 
 #countryDropdown {
@@ -63,6 +81,7 @@ body {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    transition: 0.25s all ease;
 }
 
 .checkbox-wrapper-47 label:before {
@@ -76,8 +95,8 @@ body {
     height: 1.4em;
     border: 2px solid #9098A9;
     border-radius: 6px;
-    z-index: -1;
     margin-right: 0.5em;
+    transition: 0.25s all ease;
 }
 
 .checkbox-wrapper-47 input[type=checkbox]:checked + label {
@@ -91,11 +110,6 @@ body {
     height: 2em;
     background: #b7e6c9;
     border-color: #2cbc63;
-}
-
-.checkbox-wrapper-47 label,
-.checkbox-wrapper-47 label::before {
-    transition: 0.25s all ease;
 }
 
 .checkbox-wrapper-47 label:hover {
@@ -115,12 +129,11 @@ body {
 
 .main {
     flex: 1;
-    padding: 20px 40px;
+    padding: 20px 40px 60px; /* added bottom padding */
     margin-left: 12.5%;
-    box-sizing: border-box;
     text-align: center;
-    font-size: 1.4em;         /* Slightly larger text */
-    letter-spacing: 0.05em;   /* Add spacing between letters */
+    font-size: 1.4em;
+    letter-spacing: 0.05em;
 }
 
 @media (max-width: 768px) {
@@ -136,38 +149,34 @@ body {
 
     .main {
         margin-left: 0;
-        padding: 10px;
+        padding: 10px 10px 60px;
     }
 }
 
 .info-box {
     display: flex;
-    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
     background-color: black;
     border: 1px solid white;
     border-radius: 8px;
+    padding: 16px;
     color: white;
-    padding: 20px;
-    width: 220px;
-    height: 350px;
-    margin-top: 20px;
+    width: 260px;
+    margin: 20px 0;
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
 }
 
 .info-box-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 15px;
+    flex-shrink: 0;
 }
 
 .info-box-title {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-    text-align: center;
+    margin: 0;
+    font-size: 1.2em;
 }
 
 .info-box-text {
-    font-size: 1em;
-    text-align: center;
+    margin-top: 4px;
+    line-height: 1.4em;
 }
