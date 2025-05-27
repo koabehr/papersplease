@@ -179,8 +179,8 @@ body {
     width: 260px;
     margin: 20px 0;
     box-shadow: 
-        rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
-        rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+        rgb(255, 255, 255) 0px 30px 60px -12px inset,
+        rgba(255, 255, 255, 0.24) 0px 18px 36px -18px inset;
 }
 
 .info-box-icon {
@@ -202,7 +202,7 @@ body {
 
 /* Infobox checklist styles */
 .passport-checklist {
-    font-size: 0.7em; /* much smaller */
+    font-size: 0.5em;
     margin-top: 10px;
 }
 
