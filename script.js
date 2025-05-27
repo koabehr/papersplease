@@ -3,7 +3,7 @@ const checklistDocuments = document.getElementById('checklist-documents');
 const checklistReasons = document.getElementById('checklist-reasons');
 
 // Static checklist items
-const baseItems = ['Passport', 'Polio Vaccine'];
+const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos']
 
 const reasonMap = {
   Asylum: ['Grant of Asylum'],
