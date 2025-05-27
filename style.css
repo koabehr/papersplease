@@ -140,23 +140,34 @@ body {
     }
 }
 
-.infobox {
+.info-box {
+    display: flex;
+    flex-direction: column;
     background-color: black;
     border: 1px solid white;
+    border-radius: 8px;
     color: white;
-    padding: 15px;
-    width: 200px;
+    padding: 20px;
+    width: 220px;
     height: 350px;
     margin-top: 20px;
-    margin-left: 0;
-    text-align: left;
-    font-size: 1.2em;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.1);
 }
 
-.infobox h3 {
-    font-size: 1.2em;
-    margin: 0 0 10px;
+.info-box-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.info-box-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
     text-align: center;
-    border-bottom: 1px solid white;
-    padding-bottom: 5px;
+}
+
+.info-box-text {
+    font-size: 1em;
+    text-align: center;
 }
