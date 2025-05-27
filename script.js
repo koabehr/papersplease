@@ -1,51 +1,98 @@
 const dropdown = document.getElementById('countryDropdown');
-const checklist = document.getElementById('checklist');
+const checklistDocuments = document.getElementById('checklist-documents');
+const checklistReasons = document.getElementById('checklist-reasons');
 
-function updateChecklist(country) {
-    checklist.innerHTML = ''; // Clear current list
+// Base items for documents
+const baseItems = ['Passport', 'Polio Vaccine'];
 
-    // Always present
-    const items = ['Passport', 'Polio Vaccine'];
+// Reasons and their linked documents
+const reasonMap = {
+  Asylum: ['Grant'],
+  Work: ['Permit'],
+  Diplomat: ['Authorization', 'Fingerprints'],
+  'Transit/Visiting': []
+};
 
-    // Conditional
-    if (country && country !== "Country") {
-        if (country === "Arstotzka") {
-            items.push("ID");
-        } else {
-            items.push("Access Permit");
-        }
+// State to keep selected reason
+let selectedReason = null;
+
+function updateChecklistDocuments(country, reason) {
+  checklistDocuments.innerHTML = ''; // Clear current document list
+
+  const items = [...baseItems];
+
+  if (country && country !== "Country") {
+    if (country === "Arstotzka") {
+      items.push("ID");
+    } else {
+      items.push("Access Permit");
     }
+  }
 
-    // Add checkboxes
-    items.forEach(item => {
-        addCheckbox(item);
-    });
+  if (reason && reasonMap[reason]) {
+    items.push(...reasonMap[reason]);
+  }
+
+  // Add document checkboxes
+  items.forEach(item => addCheckbox(item, checklistDocuments));
 }
 
-let checkboxCounter = 0; // to ensure unique IDs
+function updateChecklistReasons() {
+  checklistReasons.innerHTML = ''; // Clear previous
 
-function addCheckbox(labelText) {
+  Object.keys(reasonMap).forEach(reason => {
     const wrapper = document.createElement('div');
     wrapper.className = 'checkbox-wrapper-47';
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    const id = 'cb-' + labelText.replace(/\s+/g, '-').toLowerCase(); // unique ID
+    const id = 'reason-' + reason.replace(/\s+/g, '-').toLowerCase();
     checkbox.id = id;
+    checkbox.name = 'entryReason';
 
     const label = document.createElement('label');
     label.htmlFor = id;
-    label.textContent = labelText;
+    label.textContent = reason;
+
+    checkbox.addEventListener('change', () => {
+      // Uncheck other checkboxes (simulate radio button behavior)
+      document.querySelectorAll('input[name="entryReason"]').forEach(cb => {
+        if (cb !== checkbox) cb.checked = false;
+      });
+
+      selectedReason = checkbox.checked ? reason : null;
+      updateChecklistDocuments(dropdown.value, selectedReason);
+    });
 
     wrapper.appendChild(checkbox);
     wrapper.appendChild(label);
-    checklist.appendChild(wrapper);
+    checklistReasons.appendChild(wrapper);
+  });
 }
 
-// Initial load
-updateChecklist(dropdown.value);
+function addCheckbox(labelText, parent) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'checkbox-wrapper-47';
 
-// Update on change
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  const id = 'cb-' + labelText.replace(/\s+/g, '-').toLowerCase();
+  checkbox.id = id;
+
+  const label = document.createElement('label');
+  label.htmlFor = id;
+  label.textContent = labelText;
+
+  wrapper.appendChild(checkbox);
+  wrapper.appendChild(label);
+  parent.appendChild(wrapper);
+}
+
+// Initial setup
+updateChecklistReasons();
+updateChecklistDocuments(dropdown.value, selectedReason);
+
+// Country change updates document checklist
 dropdown.addEventListener('change', () => {
-    updateChecklist(dropdown.value);
+  updateChecklistDocuments(dropdown.value, selectedReason);
 });
