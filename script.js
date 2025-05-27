@@ -1,9 +1,14 @@
 const dropdown = document.getElementById('countryDropdown');
 const checklistDocuments = document.getElementById('checklist-documents');
 const checklistReasons = document.getElementById('checklist-reasons');
+const passportBox = document.getElementById('passportBox');
+const passportTitle = document.getElementById('passportTitle');
+const passportImage = document.getElementById('passportImage');
+const passportCities = document.getElementById('passportCities');
+const passportCheckbox = document.getElementById('passportCheckbox');
 
 // Static checklist items
-const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos']
+const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos'];
 
 const reasonMap = {
   Asylum: ['Grant of Asylum'],
@@ -12,19 +17,29 @@ const reasonMap = {
   'Transit/Visiting': []
 };
 
+const passportData = {
+  Arstotzka: {
+    title: 'Arstotzkan Passport',
+    photo: 'https://static.wikia.nocookie.net/papersplease/images/2/2d/PassportOuterArstotzka.png/revision/latest?cb=20130624094123',
+    cities: ['Orvech Vonor', 'East Grestin', 'Paradizna']
+  },
+  Kolechia: {
+    title: 'Kolechian Passport',
+    photo: 'kolechian-passport.png',
+    cities: ['Vedor', 'West Grestin', 'Yurko City']
+  }
+  // Add other countries similarly
+};
+
 let selectedReason = null;
 
+// Update checklist documents based on country and reason
 function updateChecklistDocuments(country, reason) {
   checklistDocuments.innerHTML = '';
-
   const items = [...baseItems];
 
   if (country && country !== 'Country') {
-    if (country === 'Arstotzka') {
-      items.push('ID');
-    } else {
-      items.push('Access Permit');
-    }
+    items.push(country === 'Arstotzka' ? 'ID' : 'Access Permit');
   }
 
   if (reason && reasonMap[reason]) {
@@ -34,6 +49,7 @@ function updateChecklistDocuments(country, reason) {
   items.forEach(item => addCheckbox(item, checklistDocuments));
 }
 
+// Update checklist reasons
 function updateChecklistReasons() {
   checklistReasons.innerHTML = '';
 
@@ -43,12 +59,11 @@ function updateChecklistReasons() {
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
-    const id = 'reason-' + reason.toLowerCase().replace(/\s+/g, '-');
-    checkbox.id = id;
+    checkbox.id = `reason-${reason.toLowerCase().replace(/\s+/g, '-')}`;
     checkbox.name = 'entryReason';
 
     const label = document.createElement('label');
-    label.htmlFor = id;
+    label.htmlFor = checkbox.id;
     label.textContent = reason;
 
     checkbox.addEventListener('change', () => {
@@ -66,18 +81,17 @@ function updateChecklistReasons() {
   });
 }
 
+// Add a checkbox to a parent element
 function addCheckbox(labelText, parent) {
   const wrapper = document.createElement('div');
   wrapper.className = 'checkbox-wrapper-47';
 
-  const id = 'cb-' + labelText.replace(/\s+/g, '-').toLowerCase();
-
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
-  checkbox.id = id;
+  checkbox.id = `cb-${labelText.replace(/\s+/g, '-').toLowerCase()}`;
 
   const label = document.createElement('label');
-  label.setAttribute('for', id);
+  label.setAttribute('for', checkbox.id);
   label.textContent = labelText;
 
   wrapper.appendChild(checkbox);
@@ -85,35 +99,8 @@ function addCheckbox(labelText, parent) {
   parent.appendChild(wrapper);
 }
 
-// Passport visuals and data
-const passportData = {
-  Arstotzka: {
-    title: 'Arstotzkan Passport',
-    photo: 'https://static.wikia.nocookie.net/papersplease/images/2/2d/PassportOuterArstotzka.png/revision/latest?cb=20130624094123',
-    cities: ['Orvech Vonor', 'East Grestin', 'Paradizna']
-  },
-  Kolechia: {
-    title: 'Kolechian Passport',
-    photo: 'kolechian-passport.png',
-    cities: ['Vedor', 'West Grestin', 'Yurko City']
-  },
-  // Add other countries similarly
-};
-
-// Initial population
-updateChecklistReasons();
-updateChecklistDocuments(dropdown.value, selectedReason);
-
-// Country dropdown logic
-dropdown.addEventListener('change', () => {
-  updateChecklistDocuments(dropdown.value, selectedReason);
-
-  const country = dropdown.value;
-  const passportBox = document.getElementById('passportBox');
-  const passportTitle = document.getElementById('passportTitle');
-  const passportImage = document.getElementById('passportImage');
-  const passportCities = document.getElementById('passportCities');
-
+// Update passport visuals and data
+function updatePassportBox(country) {
   if (passportData[country]) {
     passportBox.style.display = 'block';
     passportTitle.textContent = passportData[country].title;
@@ -128,61 +115,26 @@ dropdown.addEventListener('change', () => {
   } else {
     passportBox.style.display = 'none';
   }
+}
+
+// Initialize checklist and dropdown logic
+updateChecklistReasons();
+updateChecklistDocuments(dropdown.value, selectedReason);
+
+dropdown.addEventListener('change', () => {
+  const country = dropdown.value;
+  updateChecklistDocuments(country, selectedReason);
+  updatePassportBox(country);
 });
 
-// Logic to hide box when all checkboxes are ticked
+// Auto-check passport if all internal checkboxes are checked
 document.addEventListener('DOMContentLoaded', () => {
-    const countryDropdown = document.getElementById('countryDropdown');
-    const passportBox = document.getElementById('passportBox');
-    const passportTitle = document.getElementById('passportTitle');
-    const passportImage = document.getElementById('passportImage');
-    const passportCities = document.getElementById('passportCities');
-    const passportCheckbox = document.getElementById('passportCheckbox');
-  
-    const infoCheckboxIds = ['name', 'dob', 'sex', 'city', 'exp', 'face'];
-    const infoCheckboxes = infoCheckboxIds.map(id => document.getElementById(id));
-  
-    const countriesData = {
-      Arstotzka: {
-        title: 'Arstotzka Passport',
-        image: 'https://static.wikia.nocookie.net/papersplease/images/2/2d/PassportOuterArstotzka.png/revision/latest?cb=20130624094123',
-        cities: ['Orvech Vonor', 'East Grestin', 'Paradizna'],
-      },
-      // Add other countries here...
-    };
-  
-    countryDropdown.addEventListener('change', () => {
-      const selectedCountry = countryDropdown.value;
-      const data = countriesData[selectedCountry];
-  
-      if (data) {
-        passportBox.style.display = 'flex';
-        passportTitle.textContent = data.title;
-        passportImage.src = data.image;
-        passportImage.alt = data.title;
-  
-        // Populate cities
-        passportCities.innerHTML = '';
-        data.cities.forEach(city => {
-          const li = document.createElement('li');
-          li.textContent = city;
-          passportCities.appendChild(li);
-        });
-  
-        // Uncheck all internal checkboxes
-        infoCheckboxes.forEach(cb => cb.checked = false);
-        passportCheckbox.checked = false;
-      } else {
-        passportBox.style.display = 'none';
-      }
-    });
-  
-    // Auto-check passport if all internal boxes are checked
-    infoCheckboxes.forEach(cb => {
-      cb.addEventListener('change', () => {
-        const allChecked = infoCheckboxes.every(c => c.checked);
-        passportCheckbox.checked = allChecked;
-      });
+  const infoCheckboxIds = ['name', 'dob', 'sex', 'city', 'exp', 'face'];
+  const infoCheckboxes = infoCheckboxIds.map(id => document.getElementById(id));
+
+  infoCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      passportCheckbox.checked = infoCheckboxes.every(c => c.checked);
     });
   });
-  
+});
