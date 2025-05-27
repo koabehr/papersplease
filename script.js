@@ -47,12 +47,17 @@ function updateChecklistDocuments(country, reason) {
   }
   items.forEach(item => addCheckbox(item, checklistDocuments));
 
-  // Add event listener to Passport checkbox to hide infobox if checked
+  // Add event listener to Passport checkbox to hide/re-show infobox
   const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
   if (passportSidebarCheckbox) {
     passportSidebarCheckbox.addEventListener('change', () => {
       if (passportSidebarCheckbox.checked) {
         passportBox.classList.add('hidden');
+      } else {
+        // Only show if a valid country is selected
+        if (dropdown.value && dropdown.value !== 'Country' && passportData[dropdown.value]) {
+          passportBox.classList.remove('hidden');
+        }
       }
     });
   }
@@ -145,12 +150,17 @@ function setupInfoboxChecklist() {
     });
   });
 
-  // Also hide infobox if the passport checkbox is checked directly
+  // Also hide/re-show infobox if the passport checkbox is checked/deselected directly
   const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
   if (passportSidebarCheckbox) {
     passportSidebarCheckbox.addEventListener('change', () => {
       if (passportSidebarCheckbox.checked) {
         passportBox.classList.add('hidden');
+      } else {
+        // Only show if a valid country is selected
+        if (dropdown.value && dropdown.value !== 'Country' && passportData[dropdown.value]) {
+          passportBox.classList.remove('hidden');
+        }
       }
     });
   }
