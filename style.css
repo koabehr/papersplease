@@ -177,7 +177,7 @@ body {
 .info-box {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center; /* center align photo and text */
   gap: 12px;
   background-color: black;
   border-radius: 8px;
@@ -193,24 +193,25 @@ body {
 .info-box-icon {
   flex-shrink: 0;
   margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.info-box-title {
-  margin: 0;
-  font-size: 1.2em;
-  text-align: left;
-}
-
+.info-box-title,
 .info-box-text {
-  margin-top: 4px;
-  line-height: 1.4em;
-  text-align: left;
+  text-align: center;
+  width: 100%;
 }
 
 /* Infobox checklist styles */
 .passport-checklist {
   font-size: 0.7em;
   margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* left align checklist */
 }
 
 /* Responsive styles */
