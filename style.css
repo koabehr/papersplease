@@ -8,7 +8,7 @@ body {
 }
 
 .sidebar {
-    width: 12.5%; /* 1/8th of the page */
+    width: 12.5%;
     background: #111;
     color: white;
     padding: 20px 10px;
@@ -16,7 +16,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    position: fixed
 }
 
 .sidebar select {
@@ -27,49 +26,36 @@ body {
     border: 1px solid #444;
 }
 
-#checklist {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.main {
-    flex: 1;
-    padding: 20px;
-    text-align: center;
-}
-
 #countryDropdown {
     width: 100%;
     padding: 0.5em;
     text-align: center;
-    text-align-last: center; /* Center selected item */
-    font-size: 1.0em;
+    text-align-last: center;
+    font-size: 1em;
     border: none;
     background: #222;
     color: white;
     margin-bottom: 1em;
-  }
-  
-  /* Make the placeholder ("Country") italic and transparent */
-  #countryDropdown option[value="Country"] {
+}
+
+#countryDropdown option[value="Country"] {
     font-style: italic;
     color: rgba(255, 255, 255, 0.5);
-  }
-  
-  .checkbox-wrapper-47 {
+}
+
+.checkbox-wrapper-47 {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    font-size: 1.4em; /* adjust size as needed */
-  }
-  
-  .checkbox-wrapper-47 input[type="checkbox"] {
+    font-size: 1.4em;
+}
+
+.checkbox-wrapper-47 input[type="checkbox"] {
     display: none;
     visibility: hidden;
-  }
-  
-  .checkbox-wrapper-47 label {
+}
+
+.checkbox-wrapper-47 label {
     position: relative;
     padding-left: 2em;
     padding-right: 1em;
@@ -77,9 +63,9 @@ body {
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-  }
-  
-  .checkbox-wrapper-47 label:before {
+}
+
+.checkbox-wrapper-47 label:before {
     box-sizing: border-box;
     content: " ";
     position: absolute;
@@ -92,33 +78,62 @@ body {
     border-radius: 6px;
     z-index: -1;
     margin-right: 0.5em;
-  }
-  
-  .checkbox-wrapper-47 input[type=checkbox]:checked + label {
+}
+
+.checkbox-wrapper-47 input[type=checkbox]:checked + label {
     padding-left: 1em;
     color: #0f5229;
-  }
-  .checkbox-wrapper-47 input[type=checkbox]:checked + label:before {
+}
+
+.checkbox-wrapper-47 input[type=checkbox]:checked + label:before {
     top: 0;
     width: 100%;
     height: 2em;
     background: #b7e6c9;
     border-color: #2cbc63;
-  }
-  
-  .checkbox-wrapper-47 label,
-  .checkbox-wrapper-47 label::before {
+}
+
+.checkbox-wrapper-47 label,
+.checkbox-wrapper-47 label::before {
     transition: 0.25s all ease;
-  }
-  
-  .checklist-section {
+}
+
+.checkbox-wrapper-47 label:hover {
+    color: #66bb6a;
+}
+
+.checklist-section {
     margin-bottom: 1em;
-  }
-  
-  .checklist-section h2 {
+}
+
+.checklist-section h2 {
     font-size: 1.5em;
     margin: 0.5em 0;
     color: #fff;
     font-family: 'VT323', monospace;
-  }
-  
+}
+
+.main {
+    flex: 1;
+    padding: 20px 40px;
+    margin-left: 12.5%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        order: -1;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 10px;
+    }
+}

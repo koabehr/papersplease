@@ -21,11 +21,11 @@ function updateChecklistDocuments(country, reason) {
 
   const items = [...baseItems];
 
-  if (country && country !== "Country") {
-    if (country === "Arstotzka") {
-      items.push("ID");
+  if (country && country !== 'Country') {
+    if (country === 'Arstotzka') {
+      items.push('ID');
     } else {
-      items.push("Access Permit");
+      items.push('Access Permit');
     }
   }
 
@@ -33,7 +33,6 @@ function updateChecklistDocuments(country, reason) {
     items.push(...reasonMap[reason]);
   }
 
-  // Add document checkboxes
   items.forEach(item => addCheckbox(item, checklistDocuments));
 }
 
@@ -55,7 +54,6 @@ function updateChecklistReasons() {
     label.textContent = reason;
 
     checkbox.addEventListener('change', () => {
-      // Uncheck other checkboxes (simulate radio button behavior)
       document.querySelectorAll('input[name="entryReason"]').forEach(cb => {
         if (cb !== checkbox) cb.checked = false;
       });
@@ -74,13 +72,14 @@ function addCheckbox(labelText, parent) {
   const wrapper = document.createElement('div');
   wrapper.className = 'checkbox-wrapper-47';
 
+  const id = 'cb-' + labelText.replace(/\s+/g, '-').toLowerCase();
+
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
-  const id = 'cb-' + labelText.replace(/\s+/g, '-').toLowerCase();
   checkbox.id = id;
 
   const label = document.createElement('label');
-  label.htmlFor = id;
+  label.setAttribute('for', id);
   label.textContent = labelText;
 
   wrapper.appendChild(checkbox);
