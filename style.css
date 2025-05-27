@@ -61,7 +61,7 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
-    font-size: 1em; /* adjust size as needed */
+    font-size: 1.4em; /* adjust size as needed */
   }
   
   .checkbox-wrapper-47 input[type="checkbox"] {
