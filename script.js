@@ -7,8 +7,8 @@ const baseItems = ['Passport', 'Polio Vaccine'];
 
 // Reasons and their linked documents
 const reasonMap = {
-  Asylum: ['Grant'],
-  Work: ['Permit'],
+  Asylum: ['Grant of Asylum'],
+  Work: ['Work Pass'],
   Diplomat: ['Authorization', 'Fingerprints'],
   'Transit/Visiting': []
 };
