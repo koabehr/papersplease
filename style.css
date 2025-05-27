@@ -157,6 +157,10 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 1em;
+  /* Offset by half the sidebar width (6.25%) for true center */
+  position: relative;
+  left: 6.25%;
+  transform: translateX(0);
 }
 
 #main-title {
