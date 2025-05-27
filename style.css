@@ -160,6 +160,12 @@ body {
         margin-left: 0;
         padding: 10px 10px 60px;
     }
+
+    .main-content-wrapper {
+         transform: none;
+         align-items: center;
+    }
+    
 }
 
 .info-box {
