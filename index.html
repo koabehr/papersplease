@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Papers, Please Helper</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet" />
 </head>
 <body>
   <div class="sidebar">
@@ -23,52 +23,57 @@
     <div class="checklist-section">
       <h2>Documents</h2>
       <div id="checklist-documents">
-        <div class="checkbox-wrapper-47">
-          <input type="checkbox" id="passportCheckboxArstotzka" />
-          <label for="passportCheckboxArstotzka">Arstotzka Passport</label>
-        </div>
+        <!-- Dynamically populated -->
       </div>
     </div>
 
     <div class="checklist-section">
       <h2>Reason for Entry</h2>
-      <div id="checklist-reasons"></div>
+      <div id="checklist-reasons">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+
+    <div class="checklist-section">
+      <div class="checkbox-wrapper-47">
+        <input type="checkbox" id="passportCheckbox" />
+        <label for="passportCheckbox">Passport Verified</label>
+      </div>
     </div>
   </div>
 
   <div class="main">
     <div class="main-content-wrapper">
-      <div id="passport-ars" class="info-box passport-box" style="display: none;">
-        <img class="info-box-icon" src="https://static.wikia.nocookie.net/papersplease/images/2/2d/PassportOuterArstotzka.png/revision/latest?cb=20130624094123" alt="Arstotzka Passport" width="60" height="80" />
-        <div>
-          <h3 class="info-box-title">Arstotzka Passport</h3>
-          <p class="info-box-text">Issuing Cities:<br>Orvech Vonor<br>East Grestin<br>Paradizna</p>
+      <div id="passportBox" class="info-box passport-box" style="display: none;">
+        <h2 id="passportTitle">Passport Title</h2>
+        <img id="passportImage" src="" alt="Passport Image" width="60" height="80" />
+        <p>Issuing Cities:</p>
+        <ul id="passportCities"></ul>
 
-          <div class="passport-checklist">
-            <div class="checkbox-wrapper-47">
-              <input type="checkbox" id="ars-name" />
-              <label for="ars-name">Name</label>
-            </div>
-            <div class="checkbox-wrapper-47">
-              <input type="checkbox" id="ars-dob" />
-              <label for="ars-dob">D.O.B.</label>
-            </div>
-            <div class="checkbox-wrapper-47">
-              <input type="checkbox" id="ars-sex" />
-              <label for="ars-sex">Sex</label>
-            </div>
-            <div class="checkbox-wrapper-47">
-              <input type="checkbox" id="ars-issued" />
-              <label for="ars-issued">Issued City</label>
-            </div>
-            <div class="checkbox-wrapper-47">
-              <input type="checkbox" id="ars-exp" />
-              <label for="ars-exp">Expiration</label>
-            </div>
-            <div class="checkbox-wrapper-47">
-              <input type="checkbox" id="ars-face" />
-              <label for="ars-face">Face</label>
-            </div>
+        <div class="passport-checklist">
+          <div class="checkbox-wrapper-47">
+            <input type="checkbox" id="name" />
+            <label for="name">Name</label>
+          </div>
+          <div class="checkbox-wrapper-47">
+            <input type="checkbox" id="dob" />
+            <label for="dob">D.O.B.</label>
+          </div>
+          <div class="checkbox-wrapper-47">
+            <input type="checkbox" id="sex" />
+            <label for="sex">Sex</label>
+          </div>
+          <div class="checkbox-wrapper-47">
+            <input type="checkbox" id="city" />
+            <label for="city">Issued City</label>
+          </div>
+          <div class="checkbox-wrapper-47">
+            <input type="checkbox" id="exp" />
+            <label for="exp">Expiration</label>
+          </div>
+          <div class="checkbox-wrapper-47">
+            <input type="checkbox" id="face" />
+            <label for="face">Face</label>
           </div>
         </div>
       </div>
