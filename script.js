@@ -10,6 +10,7 @@ const checklistDocuments = document.getElementById('checklist-documents');
 const checklistReasons = document.getElementById('checklist-reasons');
 const diplomaticAuthBox = document.getElementById('diplomaticAuthBox');
 const diplomaticAuthSeals = document.getElementById('diplomaticAuthSeals');
+const workPassBox = document.getElementById('workPassBox');
 
 const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos'];
 
@@ -220,6 +221,7 @@ function updateChecklistReasons(country) {
       updateChecklistDocuments(dropdown.value, selectedReason);
       // Update Diplomatic Authorization infobox when reason changes
       updateDiplomaticAuthBox(dropdown.value, selectedReason);
+      updateWorkPassBox(selectedReason); // <-- Add this line
     });
 
     wrapper.appendChild(checkbox);
@@ -387,6 +389,20 @@ function updateDiplomaticAuthBox(country, reason) {
   }
 }
 
+function updateWorkPassBox(reason) {
+  if (reason === 'Work') {
+    workPassBox.classList.remove('hidden');
+    setupInfoboxChecklistGeneric({
+      box: workPassBox,
+      checklistIds: ['wp-seal', 'wp-name', 'wp-enddate'],
+      sidebarSelector: '#checklist-documents input[data-label="Work Pass"]',
+      shouldShow: () => selectedReason === 'Work'
+    });
+  } else {
+    workPassBox.classList.add('hidden');
+  }
+}
+
 // --- Dropdown logic ---
 dropdown.addEventListener('change', () => {
   const country = dropdown.value;
@@ -397,6 +413,7 @@ dropdown.addEventListener('change', () => {
   updateIdBox(country);
   updateAccessPermitBox(country);
   updateDiplomaticAuthBox(country, selectedReason);
+  updateWorkPassBox(selectedReason); // <-- Add this line
 });
 
 // --- On load ---
@@ -408,6 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
   idBox.classList.add('hidden');
   accessPermitBox.classList.add('hidden');
   diplomaticAuthBox.classList.add('hidden');
+  workPassBox.classList.add('hidden'); // <-- Add this line
 });
 
 // Reset button logic
@@ -421,6 +439,7 @@ resetBtn.addEventListener('click', () => {
   idBox.classList.add('hidden');
   accessPermitBox.classList.add('hidden');
   diplomaticAuthBox.classList.add('hidden');
+  workPassBox.classList.add('hidden'); // <-- Add this line
   // Hide checklists
   checklistDocuments.classList.add('hidden');
   checklistReasons.classList.add('hidden');
