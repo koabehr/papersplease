@@ -238,6 +238,19 @@ body {
   align-items: flex-start;
 }
 
+.id-box {
+  margin-top: 20px;
+}
+
+.id-checklist {
+  font-size: 0.7em;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 /* Add this for the stack container */
 #infobox-stack {
   display: flex;
