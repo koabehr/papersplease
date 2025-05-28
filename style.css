@@ -342,11 +342,22 @@ body {
   position: fixed;
   left: 0;
   bottom: 0;
-  width: 12.5%; /* Match sidebar width */
+  width: 12.5%; /* Desktop: matches sidebar */
   z-index: 10;
   margin: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+/* Responsive: Make the button wider on mobile */
+@media (max-width: 768px) {
+  #resetBtn {
+    width: 40vw; /* About twice as wide on mobile */
+    min-width: 140px;
+    font-size: 18px;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 @media (max-width: 768px) {
