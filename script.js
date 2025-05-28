@@ -48,7 +48,7 @@ const passportData = {
     photo: 'Photos/PassportObristan.png',
     cities: ['Skal', 'Lorndaz', 'Mergerous']
   },
-  United: {
+  "United Federation": { // <-- FIXED KEY
     title: 'United Federation Passport',
     photo: 'Photos/PassportUnitedFederation.png',
     cities: ['Great Rapid', 'Shingleton', 'Korista City']
