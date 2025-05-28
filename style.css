@@ -279,6 +279,19 @@ body {
   object-fit: cover;
 }
 
+.access-permit-seal {
+  /* Passport photo is 60x80 (portrait), so let's match the max dimension */
+  /* We'll use max-width: 60px and max-height: 80px to match the passport photo's largest dimension */
+  max-width: 60px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  border-radius: 50%;
+  background: #222;
+  object-fit: contain;
+  border: 1px solid #444;
+}
+
 .button-27 {
   appearance: none;
   background-color: #000000;
