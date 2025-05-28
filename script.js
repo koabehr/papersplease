@@ -338,3 +338,28 @@ document.addEventListener('DOMContentLoaded', () => {
   idBox.classList.add('hidden');
   accessPermitBox.classList.add('hidden');
 });
+
+// Reset button logic
+const resetBtn = document.getElementById('resetBtn');
+resetBtn.addEventListener('click', () => {
+  // Reset dropdown
+  dropdown.value = "Country";
+  // Hide all infoboxes
+  passportBox.classList.add('hidden');
+  polioBox.classList.add('hidden');
+  idBox.classList.add('hidden');
+  accessPermitBox.classList.add('hidden');
+  // Hide checklists
+  checklistDocuments.classList.add('hidden');
+  checklistReasons.classList.add('hidden');
+  // Uncheck all checkboxes in sidebar and infoboxes
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+  });
+  // Remove green border if present
+  document.querySelectorAll('.info-box').forEach(box => {
+    box.classList.remove('complete');
+  });
+  // Reset selectedReason
+  selectedReason = null;
+});
