@@ -234,12 +234,18 @@ body {
 /* Add this for the stack container */
 #infobox-stack {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 32px;
   width: 100%;
-  max-width: 320px;
-  overflow-y: auto;
-  overflow-x: hidden;
+  max-width: 100%; /* Prevents overflow */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  align-items: flex-start;
+}
+
+/* Ensure infoboxes don't grow too wide */
+.info-box {
+  flex: 0 0 260px; /* Fixed width, no grow, no shrink */
+  max-width: 100%;
 }
 
 /* Responsive styles */
@@ -262,5 +268,11 @@ body {
   .main-content-wrapper {
     transform: none;
     align-items: flex-start;
+  }
+}
+@media (max-width: 700px) {
+  #infobox-stack {
+    flex-direction: column;
+    gap: 16px;
   }
 }
