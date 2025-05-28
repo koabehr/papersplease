@@ -12,9 +12,9 @@ const checklistReasons = document.getElementById('checklist-reasons');
 const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos'];
 
 const reasonMap = {
-  Asylum: ['Grant of Asylum'],
+  Asylum: ['Grant of Asylum', 'Fingerprints'],
   Work: ['Work Pass'],
-  Diplomat: ['Authorization', 'Fingerprints'],
+  Diplomat: ['Authorization'],
   'Transit/Visiting': [],
   Immigrate: []
 };
