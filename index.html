@@ -42,7 +42,9 @@
       </div>
       <div id="infobox-stack">
         <div id="passportBox" class="info-box passport-box hidden">
-          <img id="passportImage" class="info-box-icon" src="" alt="Passport" width="60" height="80" />
+          <div class="passport-photo-wrapper">
+            <img id="passportImage" class="passport-photo" src="" alt="Passport" />
+          </div>
           <div>
             <h3 id="passportTitle" class="info-box-title">Passport Title</h3>
             <div class="info-box-text">
@@ -102,6 +104,10 @@
         </div>
         <div id="wantedPhotosBox" class="info-box wanted-photos-box hidden">
           <h3 class="info-box-title">Wanted Photos</h3>
+          <div class="infobox-photos">
+            <img src="Photos/WantedPhoto1.png" alt="Wanted Photo 1" class="infobox-photo" />
+            <img src="Photos/WantedPhoto2.png" alt="Wanted Photo 2" class="infobox-photo" />
+          </div>
           <div class="wanted-photos-checklist passport-checklist">
             <div class="checkbox-wrapper-47">
               <input type="checkbox" id="wp-notcriminal" />
@@ -111,6 +117,10 @@
         </div>
         <div id="fingerprintsBox" class="info-box fingerprints-box hidden">
           <h3 class="info-box-title">Fingerprints</h3>
+          <div class="infobox-photos">
+            <img src="Photos/Fingerprints1.png" alt="Fingerprints 1" class="infobox-photo" />
+            <img src="Photos/Fingerprints2.png" alt="Fingerprints 2" class="infobox-photo" />
+          </div>
           <div class="fingerprints-checklist passport-checklist">
             <div class="checkbox-wrapper-47">
               <input type="checkbox" id="fp-fingerprints" />
@@ -163,9 +173,9 @@
           </div>
         </div>
         <div id="accessPermitBox" class="info-box access-permit-box hidden">
-          <div class="access-permit-seals">
-            <img src="Photos/AccessPermitSeal1.png" alt="Access Permit Seal 1" class="access-permit-seal" width="40" height="40" />
-            <img src="Photos/AccessPermitSeal2.png" alt="Access Permit Seal 2" class="access-permit-seal" width="40" height="40" />
+          <div class="infobox-photos">
+            <img src="Photos/AccessPermitSeal1.png" alt="Access Permit Seal 1" class="infobox-photo" />
+            <img src="Photos/AccessPermitSeal2.png" alt="Access Permit Seal 2" class="infobox-photo" />
           </div>
           <h3 class="info-box-title">Access Permit</h3>
           <div class="access-permit-checklist passport-checklist">
@@ -212,7 +222,7 @@
           </div>
         </div>
         <div id="diplomaticAuthBox" class="info-box diplomatic-auth-box hidden">
-          <div class="diplomatic-auth-seals" id="diplomaticAuthSeals">
+          <div class="infobox-photos" id="diplomaticAuthSeals">
             <!-- Seal images will be injected here by JS -->
           </div>
           <h3 class="info-box-title">Diplomatic Authorization</h3>
@@ -263,9 +273,9 @@
           </div>
         </div>
         <div id="asylumGrantBox" class="info-box asylum-grant-box hidden">
-          <div class="asylum-grant-seals">
-            <img src="Photos/AccessPermitSeal1.png" alt="Asylum Grant Seal 1" class="asylum-grant-seal" />
-            <img src="Photos/AccessPermitSeal2.png" alt="Asylum Grant Seal 2" class="asylum-grant-seal" />
+          <div class="infobox-photos">
+            <img src="Photos/AccessPermitSeal1.png" alt="Asylum Grant Seal 1" class="infobox-photo" />
+            <img src="Photos/AccessPermitSeal2.png" alt="Asylum Grant Seal 2" class="infobox-photo" />
           </div>
           <h3 class="info-box-title">Grant of Asylum</h3>
           <div class="asylum-grant-checklist passport-checklist">
