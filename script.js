@@ -182,9 +182,13 @@ function setupInfoboxChecklist() {
       const allChecked = infoCheckboxes.every(c => c.checked);
       const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
       if (allChecked) {
-        if (passportSidebarCheckbox) passportSidebarCheckbox.checked = true;
-        passportBox.classList.add('hidden');
-        infoCheckboxes.forEach(c => (c.checked = false));
+        passportBox.classList.add('complete');
+        setTimeout(() => {
+          if (passportSidebarCheckbox) passportSidebarCheckbox.checked = true;
+          passportBox.classList.add('hidden');
+          passportBox.classList.remove('complete');
+          infoCheckboxes.forEach(c => (c.checked = false));
+        }, 1000);
       }
     });
   });
@@ -193,6 +197,7 @@ function setupInfoboxChecklist() {
   const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
   if (passportSidebarCheckbox) {
     passportSidebarCheckbox.addEventListener('change', () => {
+      passportBox.classList.remove('complete');
       if (passportSidebarCheckbox.checked) {
         passportBox.classList.add('hidden');
       } else {
@@ -213,9 +218,13 @@ function setupPolioInfoboxChecklist() {
       const allChecked = polioCheckboxes.every(c => c.checked);
       const polioSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Polio Vaccine"]');
       if (allChecked) {
-        if (polioSidebarCheckbox) polioSidebarCheckbox.checked = true;
-        polioBox.classList.add('hidden');
-        polioCheckboxes.forEach(c => (c.checked = false));
+        polioBox.classList.add('complete');
+        setTimeout(() => {
+          if (polioSidebarCheckbox) polioSidebarCheckbox.checked = true;
+          polioBox.classList.add('hidden');
+          polioBox.classList.remove('complete');
+          polioCheckboxes.forEach(c => (c.checked = false));
+        }, 1000);
       }
     });
   });
@@ -224,6 +233,7 @@ function setupPolioInfoboxChecklist() {
   const polioSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Polio Vaccine"]');
   if (polioSidebarCheckbox) {
     polioSidebarCheckbox.addEventListener('change', () => {
+      polioBox.classList.remove('complete');
       if (polioSidebarCheckbox.checked) {
         polioBox.classList.add('hidden');
       } else {

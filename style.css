@@ -181,7 +181,7 @@ body {
 .info-box {
   display: flex;
   flex-direction: column;
-  align-items: center; /* center align photo and text */
+  align-items: center;
   gap: 12px;
   background-color: rgb(65, 65, 65);
   border-radius: 8px;
@@ -192,6 +192,13 @@ body {
   box-shadow: 
       rgba(255, 112, 112, 0.411) 0px 30px 60px -12px inset,
       rgba(255, 112, 112, 0.3) 0px 18px 36px -18px inset;
+  transition: box-shadow 0.2s;
+}
+
+.info-box.complete {
+  box-shadow:
+      rgba(46, 204, 99, 0.411) 0px 30px 60px -12px inset,
+      rgba(46, 204, 99, 0.3) 0px 18px 36px -18px inset;
 }
 
 .info-box-icon {
