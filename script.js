@@ -5,6 +5,17 @@ const idBox = document.getElementById('idBox');
 const passportTitle = document.getElementById('passportTitle');
 const passportImage = document.getElementById('passportImage');
 const passportCities = document.getElementById('passportCities');
+const checklistDocuments = document.getElementById('checklist-documents');
+const checklistReasons = document.getElementById('checklist-reasons');
+
+const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos'];
+
+const reasonMap = {
+  Asylum: ['Grant of Asylum'],
+  Work: ['Work Pass'],
+  Diplomat: ['Authorization', 'Fingerprints'],
+  'Transit/Visiting': []
+};
 
 const passportData = {
   Arstotzka: {
@@ -44,6 +55,186 @@ const passportData = {
   }
 };
 
+let selectedReason = null;
+
+// --- Checklist rendering functions ---
+
+function addCheckbox(labelText, parent) {
+  const wrapper = document.createElement('div');
+  wrapper.className = 'checkbox-wrapper-47';
+
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.id = `cb-${labelText.replace(/\s+/g, '-').toLowerCase()}`;
+  checkbox.dataset.label = labelText;
+
+  const label = document.createElement('label');
+  label.setAttribute('for', checkbox.id);
+  label.textContent = labelText;
+
+  wrapper.appendChild(checkbox);
+  wrapper.appendChild(label);
+  parent.appendChild(wrapper);
+}
+
+function updateChecklistDocuments(country, reason) {
+  checklistDocuments.innerHTML = '';
+  if (!country || country === 'Country') {
+    checklistDocuments.classList.add('hidden');
+    return;
+  }
+  checklistDocuments.classList.remove('hidden');
+  const items = [...baseItems];
+  items.push(country === 'Arstotzka' ? 'ID' : 'Access Permit');
+  if (reason && reasonMap[reason]) {
+    items.push(...reasonMap[reason]);
+  }
+  items.forEach(item => addCheckbox(item, checklistDocuments));
+
+  // Passport infobox hide/show logic
+  const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
+  if (passportSidebarCheckbox) {
+    passportSidebarCheckbox.addEventListener('change', () => {
+      passportBox.classList.remove('complete');
+      if (passportSidebarCheckbox.checked) {
+        passportBox.classList.add('hidden');
+      } else {
+        if (dropdown.value && dropdown.value !== 'Country' && passportData[dropdown.value]) {
+          passportBox.classList.remove('hidden');
+        }
+      }
+    });
+  }
+
+  // Polio infobox hide/show logic
+  const polioSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Polio Vaccine"]');
+  if (polioSidebarCheckbox) {
+    polioSidebarCheckbox.addEventListener('change', () => {
+      polioBox.classList.remove('complete');
+      if (polioSidebarCheckbox.checked) {
+        polioBox.classList.add('hidden');
+      } else {
+        if (dropdown.value && dropdown.value !== 'Country') {
+          polioBox.classList.remove('hidden');
+        }
+      }
+    });
+  }
+
+  // ID infobox hide/show logic
+  const idSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="ID"]');
+  if (idSidebarCheckbox) {
+    idSidebarCheckbox.addEventListener('change', () => {
+      idBox.classList.remove('complete');
+      if (idSidebarCheckbox.checked) {
+        idBox.classList.add('hidden');
+      } else {
+        if (dropdown.value === 'Arstotzka') {
+          idBox.classList.remove('hidden');
+        }
+      }
+    });
+  }
+}
+
+function updateChecklistReasons(country) {
+  checklistReasons.innerHTML = '';
+  if (!country || country === 'Country') {
+    checklistReasons.classList.add('hidden');
+    return;
+  }
+  checklistReasons.classList.remove('hidden');
+  Object.keys(reasonMap).forEach(reason => {
+    const wrapper = document.createElement('div');
+    wrapper.className = 'checkbox-wrapper-47';
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = `reason-${reason.toLowerCase().replace(/\s+/g, '-')}`;
+    checkbox.name = 'entryReason';
+
+    const label = document.createElement('label');
+    label.htmlFor = checkbox.id;
+    label.textContent = reason;
+
+    checkbox.addEventListener('change', () => {
+      document.querySelectorAll('input[name="entryReason"]').forEach(cb => {
+        if (cb !== checkbox) cb.checked = false;
+      });
+      selectedReason = checkbox.checked ? reason : null;
+      updateChecklistDocuments(dropdown.value, selectedReason);
+    });
+
+    wrapper.appendChild(checkbox);
+    wrapper.appendChild(label);
+    checklistReasons.appendChild(wrapper);
+  });
+}
+
+// --- Infobox logic ---
+
+function setupInfoboxChecklist() {
+  const infoCheckboxIds = ['name', 'passport-id', 'dob', 'sex', 'city', 'exp', 'face'];
+  const infoCheckboxes = infoCheckboxIds.map(id => document.getElementById(id));
+  infoCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const allChecked = infoCheckboxes.every(c => c.checked);
+      const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
+      if (allChecked) {
+        passportBox.classList.add('complete');
+        setTimeout(() => {
+          if (passportSidebarCheckbox) passportSidebarCheckbox.checked = true;
+          passportBox.classList.add('hidden');
+          passportBox.classList.remove('complete');
+          infoCheckboxes.forEach(c => (c.checked = false));
+        }, 1000);
+      }
+    });
+  });
+}
+
+function setupPolioInfoboxChecklist() {
+  const polioCheckboxIds = ['polio-name', 'polio-id', 'polio-exp'];
+  const polioCheckboxes = polioCheckboxIds.map(id => document.getElementById(id));
+  polioCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const allChecked = polioCheckboxes.every(c => c.checked);
+      const polioSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Polio Vaccine"]');
+      if (allChecked) {
+        polioBox.classList.add('complete');
+        setTimeout(() => {
+          if (polioSidebarCheckbox) polioSidebarCheckbox.checked = true;
+          polioBox.classList.add('hidden');
+          polioBox.classList.remove('complete');
+          polioCheckboxes.forEach(c => (c.checked = false));
+        }, 1000);
+      }
+    });
+  });
+}
+
+function setupIdInfoboxChecklist() {
+  const idCheckboxIds = ['id-district', 'id-name', 'id-dob', 'id-height', 'id-weight'];
+  const idCheckboxes = idCheckboxIds.map(id => document.getElementById(id));
+  idCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const allChecked = idCheckboxes.every(c => c.checked);
+      const idSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="ID"]');
+      if (allChecked) {
+        idBox.classList.add('complete');
+        setTimeout(() => {
+          if (idSidebarCheckbox) idSidebarCheckbox.checked = true;
+          idBox.classList.add('hidden');
+          idBox.classList.remove('complete');
+          idCheckboxes.forEach(c => (c.checked = false));
+        }, 1000);
+      }
+    });
+  });
+}
+
+// --- Infobox show/hide logic ---
+
 function updatePassportBox(country) {
   if (passportData[country]) {
     passportBox.classList.remove('hidden');
@@ -55,6 +246,7 @@ function updatePassportBox(country) {
       li.textContent = city;
       passportCities.appendChild(li);
     });
+    setupInfoboxChecklist();
   } else {
     passportBox.classList.add('hidden');
   }
@@ -78,14 +270,22 @@ function updateIdBox(country) {
   }
 }
 
+// --- Dropdown logic ---
+
 dropdown.addEventListener('change', () => {
   const country = dropdown.value;
+  updateChecklistDocuments(country, selectedReason);
+  updateChecklistReasons(country);
   updatePassportBox(country);
   updatePolioBox(country);
   updateIdBox(country);
 });
 
+// --- On load ---
+
 document.addEventListener('DOMContentLoaded', () => {
+  checklistDocuments.classList.add('hidden');
+  checklistReasons.classList.add('hidden');
   passportBox.classList.add('hidden');
   polioBox.classList.add('hidden');
   idBox.classList.add('hidden');
