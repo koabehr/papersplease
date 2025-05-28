@@ -231,24 +231,15 @@ body {
   align-items: flex-start;
 }
 
-.info-box-group {
-  display: flex;
-  flex-direction: row;
-  gap: 32px;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-.infobox-grid {
+/* Add this for the stack container */
+#infobox-stack {
   display: flex;
   flex-direction: column;
   gap: 32px;
   width: 100%;
-  max-width: 320px; /* or whatever fits your infobox width + padding */
+  max-width: 320px;
   overflow-y: auto;
   overflow-x: hidden;
-  /* Optionally set a max-height if you want the grid to scroll within a certain area */
 }
 
 /* Responsive styles */
