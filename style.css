@@ -256,6 +256,26 @@ body {
   max-width: 100%;
 }
 
+.access-permit-box {
+  margin-top: 20px;
+}
+
+.access-permit-photos {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.access-permit-photo {
+  border-radius: 4px;
+  background: #222;
+  object-fit: cover;
+}
+
 @media (max-width: 768px) {
   body {
     flex-direction: column;

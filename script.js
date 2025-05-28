@@ -2,6 +2,7 @@ const dropdown = document.getElementById('countryDropdown');
 const passportBox = document.getElementById('passportBox');
 const polioBox = document.getElementById('polioBox');
 const idBox = document.getElementById('idBox');
+const accessPermitBox = document.getElementById('accessPermitBox');
 const passportTitle = document.getElementById('passportTitle');
 const passportImage = document.getElementById('passportImage');
 const passportCities = document.getElementById('passportCities');
@@ -14,7 +15,8 @@ const reasonMap = {
   Asylum: ['Grant of Asylum'],
   Work: ['Work Pass'],
   Diplomat: ['Authorization', 'Fingerprints'],
-  'Transit/Visiting': []
+  'Transit/Visiting': [],
+  Immigrate: []
 };
 
 const passportData = {
@@ -131,6 +133,25 @@ function updateChecklistDocuments(country, reason) {
       } else {
         if (dropdown.value === 'Arstotzka') {
           idBox.classList.remove('hidden');
+        }
+      }
+    });
+  }
+
+  // Access Permit infobox hide/show logic
+  const apSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Access Permit"]');
+  if (apSidebarCheckbox) {
+    apSidebarCheckbox.addEventListener('change', () => {
+      accessPermitBox.classList.remove('complete');
+      if (apSidebarCheckbox.checked) {
+        accessPermitBox.classList.add('hidden');
+      } else {
+        if (
+          dropdown.value &&
+          dropdown.value !== 'Country' &&
+          dropdown.value !== 'Arstotzka'
+        ) {
+          accessPermitBox.classList.remove('hidden');
         }
       }
     });
@@ -263,6 +284,38 @@ function updateIdBox(country) {
   }
 }
 
+function updateAccessPermitBox(country) {
+  if (
+    country &&
+    country !== 'Country' &&
+    country !== 'Arstotzka'
+  ) {
+    accessPermitBox.classList.remove('hidden');
+    setupInfoboxChecklistGeneric({
+      box: accessPermitBox,
+      checklistIds: [
+        'ap-seal',
+        'ap-name',
+        'ap-nationality',
+        'ap-id',
+        'ap-purpose',
+        'ap-duration',
+        'ap-height',
+        'ap-weight',
+        'ap-appearance',
+        'ap-expiration'
+      ],
+      sidebarSelector: '#checklist-documents input[data-label="Access Permit"]',
+      shouldShow: () =>
+        dropdown.value &&
+        dropdown.value !== 'Country' &&
+        dropdown.value !== 'Arstotzka'
+    });
+  } else {
+    accessPermitBox.classList.add('hidden');
+  }
+}
+
 // --- Dropdown logic ---
 
 dropdown.addEventListener('change', () => {
@@ -272,6 +325,7 @@ dropdown.addEventListener('change', () => {
   updatePassportBox(country);
   updatePolioBox(country);
   updateIdBox(country);
+  updateAccessPermitBox(country);
 });
 
 // --- On load ---
@@ -282,4 +336,5 @@ document.addEventListener('DOMContentLoaded', () => {
   passportBox.classList.add('hidden');
   polioBox.classList.add('hidden');
   idBox.classList.add('hidden');
+  accessPermitBox.classList.add('hidden');
 });
