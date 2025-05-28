@@ -444,3 +444,34 @@ body {
     gap: 16px;
   }
 }
+
+/* Group polio, wanted photos, and fingerprints vertically on desktop */
+@media (min-width: 769px) {
+  #infobox-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    align-items: flex-start;
+  }
+
+  /* Stack these three vertically as a column */
+  #polioBox,
+  #wantedPhotosBox,
+  #fingerprintsBox {
+    /* Place them in a column together */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Use a wrapper to force vertical stacking for these three */
+  #polio-wanted-fingerprint-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+}
