@@ -190,8 +190,8 @@ body {
   width: 260px;
   margin: 20px 0;
   box-shadow: 
-      rgba(255, 255, 255, 0.411) 0px 30px 60px -12px inset,
-      rgba(255, 255, 255, 0.3) 0px 18px 36px -18px inset;
+      rgba(255, 112, 112, 0.411) 0px 30px 60px -12px inset,
+      rgba(255, 112, 112, 0.3) 0px 18px 36px -18px inset;
 }
 
 .info-box-icon {
