@@ -1,9 +1,7 @@
-/* Utility */
 .hidden {
   display: none !important;
 }
 
-/* Global box-sizing for consistent layout */
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -23,7 +21,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Sidebar styles */
 .sidebar {
   width: 12.5%;
   background: rgb(65, 65, 65);
@@ -65,7 +62,6 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* Checklist section styles */
 .checklist-section {
   margin-bottom: 1em;
 }
@@ -77,7 +73,6 @@ body {
   font-family: 'VT323', monospace;
 }
 
-/* Checkbox styles */
 .checkbox-wrapper-47 {
   display: flex;
   align-items: center;
@@ -127,11 +122,10 @@ body {
   color: #66bb6a;
 }
 
-/* Main content styles */
 .main {
   flex: 1;
   padding: 20px 40px 60px;
-  margin-left: 6.25%; /* Was 12.5%, now half */
+  margin-left: 6.25%;
   text-align: center;
   font-size: 1.4em;
   letter-spacing: 0.05em;
@@ -145,7 +139,7 @@ body {
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* left align infobox */
+  align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
   text-align: left;
@@ -157,7 +151,6 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 1em;
-  /* Offset by half the sidebar width for true center */
   position: relative;
   left: 6.25%;
   transform: translateX(0);
@@ -165,19 +158,18 @@ body {
 
 #main-title {
   text-align: center;
-  font-size: 1.5em; /* Shrunk to half */
+  font-size: 1.5em;
   margin: 0.5em 0;
   color: white;
 }
 
 #main-description {
   text-align: center;
-  font-size: 0.75em; /* Shrunk to half */
+  font-size: 0.75em;
   margin-bottom: 1em;
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* Info box styles */
 .info-box {
   display: flex;
   flex-direction: column;
@@ -215,14 +207,13 @@ body {
   width: 100%;
 }
 
-/* Infobox checklist styles */
 .passport-checklist {
   font-size: 0.7em;
   margin-top: 10px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* left align checklist */
+  align-items: flex-start;
 }
 
 .polio-box {
@@ -251,24 +242,21 @@ body {
   align-items: flex-start;
 }
 
-/* Add this for the stack container */
 #infobox-stack {
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
   width: 100%;
-  max-width: 100%; /* Prevents overflow */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
+  max-width: 100%;
+  overflow-x: hidden;
   align-items: flex-start;
 }
 
-/* Ensure infoboxes don't grow too wide */
 .info-box {
-  flex: 0 0 260px; /* Fixed width, no grow, no shrink */
+  flex: 0 0 260px;
   max-width: 100%;
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
   body {
     flex-direction: column;
