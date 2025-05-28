@@ -19,14 +19,39 @@ const reasonMap = {
 
 const passportData = {
   Arstotzka: {
-    title: 'Arstotzkan Passport',
-    photo: 'https://static.wikia.nocookie.net/papersplease/images/2/2d/PassportOuterArstotzka.png/revision/latest?cb=20130624094123',
+    title: 'Arstotzka Passport',
+    photo: 'Photos/PassportArstotzka.png',
     cities: ['Orvech Vonor', 'East Grestin', 'Paradizna']
   },
   Kolechia: {
-    title: 'Kolechian Passport',
-    photo: 'https://static.wikia.nocookie.net/papersplease/images/7/7a/PassportOuterKolechia.png/revision/latest?cb=20130624094204',
+    title: 'Kolechia Passport',
+    photo: 'Photos/PassportKolechia.png',
     cities: ['Vedor', 'West Grestin', 'Yurko City']
+  },
+  Antegria: {
+    title: 'Antegria Passport',
+    photo: 'Photos/PassportAntegria.png',
+    cities: ['St. Marmero', 'Glorian', 'Outer Grouse']
+  },
+  Impor: {
+    title: 'Impor Passport',
+    photo: 'Photos/PassportImpor.png',
+    cities: ['Enkyo', 'Haihan', 'Tsunkeido']
+  },
+  Republia: {
+    title: 'Republia Passport',
+    photo: 'Photos/PassportRepublia.png',
+    cities: ['True Glorian', 'Lesrenadi', 'Bostan']
+  },
+  Obristan: {
+    title: 'Obristan Passport',
+    photo: 'Photos/PassportObristan.png',
+    cities: ['Skal', 'Lorndaz', 'Mergerous']
+  },
+  UnitedFederation: {
+    title: 'United Federation Passport',
+    photo: 'Photos/PassportUnitedFederation.png',
+    cities: ['Great Rapid', 'Shingleton', 'Korista City']
   }
   // Add other countries as needed
 };
