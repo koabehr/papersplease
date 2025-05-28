@@ -251,8 +251,10 @@ body {
 }
 
 .info-box {
-  flex: 0 0 260px;
-  max-width: 100%;
+  flex: none;
+  width: 260px;
+  min-height: 0;      /* Remove any min-height */
+  height: auto;       /* Let height fit content */
 }
 
 .info-box-title {
