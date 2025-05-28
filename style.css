@@ -203,7 +203,13 @@ body {
   margin-right: auto;
 }
 
-.info-box-title,
+.info-box-title {
+  margin-top: 8px;    /* Reduce top margin */
+  margin-bottom: 8px; /* Reduce bottom margin by half (was likely 16px or more) */
+  text-align: center;
+  width: 100%;
+}
+
 .info-box-text {
   text-align: center;
   width: 100%;
@@ -369,4 +375,13 @@ body {
     flex-direction: column;
     gap: 16px;
   }
+}
+
+/* For the Access Permit infobox, reduce the gap between title and checklist */
+.access-permit-box .info-box-title {
+  margin-bottom: 8px; /* Reduce bottom margin by half */
+}
+
+.access-permit-checklist {
+  margin-top: 8px; /* Reduce top margin by half if needed */
 }
