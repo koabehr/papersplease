@@ -385,3 +385,28 @@ body {
 .access-permit-checklist {
   margin-top: 8px; /* Reduce top margin by half if needed */
 }
+
+.diplomatic-auth-box {
+  margin-top: 20px;
+}
+
+.diplomatic-auth-seals {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.diplomatic-auth-seal {
+  max-width: 60px;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  border-radius: 50%;
+  background: #222;
+  object-fit: contain;
+  border: 1px solid #444;
+}

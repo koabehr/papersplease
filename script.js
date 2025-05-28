@@ -8,6 +8,8 @@ const passportImage = document.getElementById('passportImage');
 const passportCities = document.getElementById('passportCities');
 const checklistDocuments = document.getElementById('checklist-documents');
 const checklistReasons = document.getElementById('checklist-reasons');
+const diplomaticAuthBox = document.getElementById('diplomaticAuthBox');
+const diplomaticAuthSeals = document.getElementById('diplomaticAuthSeals');
 
 const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos'];
 
@@ -55,6 +57,38 @@ const passportData = {
     photo: 'Photos/PassportUnitedFederation.png',
     cities: ['Great Rapid', 'Shingleton', 'Korista City']
   }
+};
+
+// Map for diplomatic seals by country
+const diplomaticSealMap = {
+  Arstotzka: [
+    'Photos/ArstotzkaDiplomaticSeal1.png',
+    'Photos/ArstotzkaDiplomaticSeal2.png'
+  ],
+  Antegria: [
+    'Photos/AntegriaDiplomaticSeal1.png',
+    'Photos/AntegriaDiplomaticSeal2.png'
+  ],
+  Impor: [
+    'Photos/ImporDiplomaticSeal1.png',
+    'Photos/ImporDiplomaticSeal2.png'
+  ],
+  Kolechia: [
+    'Photos/KolechiaDiplomaticSeal1.png',
+    'Photos/KolechiaDiplomaticSeal2.png'
+  ],
+  Obristan: [
+    'Photos/ObristanDiplomaticSeal1.png',
+    'Photos/ObristanDiplomaticSeal2.png'
+  ],
+  Republia: [
+    'Photos/RepubliaDiplomaticSeal1.png',
+    'Photos/RepubliaDiplomaticSeal2.png'
+  ],
+  "United Federation": [
+    'Photos/UFedDiplomaticSeal1.png',
+    'Photos/UFedDiplomaticSeal2.png'
+  ]
 };
 
 let selectedReason = null;
@@ -184,6 +218,8 @@ function updateChecklistReasons(country) {
       });
       selectedReason = checkbox.checked ? reason : null;
       updateChecklistDocuments(dropdown.value, selectedReason);
+      // Update Diplomatic Authorization infobox when reason changes
+      updateDiplomaticAuthBox(dropdown.value, selectedReason);
     });
 
     wrapper.appendChild(checkbox);
@@ -316,8 +352,42 @@ function updateAccessPermitBox(country) {
   }
 }
 
-// --- Dropdown logic ---
+function updateDiplomaticAuthBox(country, reason) {
+  if (reason === 'Diplomat' && country && country !== 'Country') {
+    diplomaticAuthBox.classList.remove('hidden');
+    // Set correct seals
+    diplomaticAuthSeals.innerHTML = '';
+    const seals = diplomaticSealMap[country];
+    if (seals) {
+      seals.forEach(src => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = `${country} Diplomatic Seal`;
+        img.className = 'diplomatic-auth-seal';
+        diplomaticAuthSeals.appendChild(img);
+      });
+    }
+    setupInfoboxChecklistGeneric({
+      box: diplomaticAuthBox,
+      checklistIds: [
+        'da-seal',
+        'da-name',
+        'da-id',
+        'da-country',
+        'da-arstotzka'
+      ],
+      sidebarSelector: '#checklist-documents input[data-label="Authorization"]',
+      shouldShow: () =>
+        dropdown.value &&
+        dropdown.value !== 'Country' &&
+        selectedReason === 'Diplomat'
+    });
+  } else {
+    diplomaticAuthBox.classList.add('hidden');
+  }
+}
 
+// --- Dropdown logic ---
 dropdown.addEventListener('change', () => {
   const country = dropdown.value;
   updateChecklistDocuments(country, selectedReason);
@@ -326,10 +396,10 @@ dropdown.addEventListener('change', () => {
   updatePolioBox(country);
   updateIdBox(country);
   updateAccessPermitBox(country);
+  updateDiplomaticAuthBox(country, selectedReason);
 });
 
 // --- On load ---
-
 document.addEventListener('DOMContentLoaded', () => {
   checklistDocuments.classList.add('hidden');
   checklistReasons.classList.add('hidden');
@@ -337,6 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
   polioBox.classList.add('hidden');
   idBox.classList.add('hidden');
   accessPermitBox.classList.add('hidden');
+  diplomaticAuthBox.classList.add('hidden');
 });
 
 // Reset button logic
@@ -349,6 +420,7 @@ resetBtn.addEventListener('click', () => {
   polioBox.classList.add('hidden');
   idBox.classList.add('hidden');
   accessPermitBox.classList.add('hidden');
+  diplomaticAuthBox.classList.add('hidden');
   // Hide checklists
   checklistDocuments.classList.add('hidden');
   checklistReasons.classList.add('hidden');
