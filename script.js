@@ -123,7 +123,14 @@ function updateChecklistDocuments(country, reason) {
   }
   checklistDocuments.classList.remove('hidden');
   const items = [...baseItems];
-  items.push(country === 'Arstotzka' ? 'ID' : 'Access Permit');
+
+  // Only add Access Permit if NOT Arstotzka, NOT Asylum, NOT Diplomat
+  if (country === 'Arstotzka') {
+    items.push('ID');
+  } else if (reason !== 'Asylum' && reason !== 'Diplomat') {
+    items.push('Access Permit');
+  }
+
   if (reason && reasonMap[reason]) {
     items.push(...reasonMap[reason]);
   }
@@ -220,10 +227,10 @@ function updateChecklistReasons(country) {
       });
       selectedReason = checkbox.checked ? reason : null;
       updateChecklistDocuments(dropdown.value, selectedReason);
-      // Update Diplomatic Authorization infobox when reason changes
       updateDiplomaticAuthBox(dropdown.value, selectedReason);
-      updateWorkPassBox(selectedReason); // <-- Add this line
-      updateAsylumGrantBox(selectedReason); // <-- Grant of Asylum logic added here
+      updateWorkPassBox(selectedReason);
+      updateAsylumGrantBox(selectedReason);
+      updateAccessPermitBox(dropdown.value, selectedReason); // <-- add this
     });
 
     wrapper.appendChild(checkbox);
@@ -324,11 +331,13 @@ function updateIdBox(country) {
   }
 }
 
-function updateAccessPermitBox(country) {
+function updateAccessPermitBox(country, reason) {
   if (
     country &&
     country !== 'Country' &&
-    country !== 'Arstotzka'
+    country !== 'Arstotzka' &&
+    reason !== 'Asylum' &&
+    reason !== 'Diplomat'
   ) {
     accessPermitBox.classList.remove('hidden');
     setupInfoboxChecklistGeneric({
@@ -349,7 +358,9 @@ function updateAccessPermitBox(country) {
       shouldShow: () =>
         dropdown.value &&
         dropdown.value !== 'Country' &&
-        dropdown.value !== 'Arstotzka'
+        dropdown.value !== 'Arstotzka' &&
+        selectedReason !== 'Asylum' &&
+        selectedReason !== 'Diplomat'
     });
   } else {
     accessPermitBox.classList.add('hidden');
@@ -439,7 +450,7 @@ dropdown.addEventListener('change', () => {
   updatePassportBox(country);
   updatePolioBox(country);
   updateIdBox(country);
-  updateAccessPermitBox(country);
+  updateAccessPermitBox(country, selectedReason); // <-- pass both
   updateDiplomaticAuthBox(country, selectedReason);
   updateWorkPassBox(selectedReason);
   updateAsylumGrantBox(selectedReason);
