@@ -1,17 +1,20 @@
 const dropdown = document.getElementById('countryDropdown');
 const passportBox = document.getElementById('passportBox');
 const polioBox = document.getElementById('polioBox');
+const fingerprintsBox = document.getElementById('fingerprintsBox');
 const idBox = document.getElementById('idBox');
 const accessPermitBox = document.getElementById('accessPermitBox');
+const diplomaticAuthBox = document.getElementById('diplomaticAuthBox');
+const workPassBox = document.getElementById('workPassBox');
+const asylumGrantBox = document.getElementById('asylumGrantBox');
 const passportTitle = document.getElementById('passportTitle');
 const passportImage = document.getElementById('passportImage');
 const passportCities = document.getElementById('passportCities');
 const checklistDocuments = document.getElementById('checklist-documents');
 const checklistReasons = document.getElementById('checklist-reasons');
-const diplomaticAuthBox = document.getElementById('diplomaticAuthBox');
-const diplomaticAuthSeals = document.getElementById('diplomaticAuthSeals');
-const workPassBox = document.getElementById('workPassBox');
-const asylumGrantBox = document.getElementById('asylumGrantBox');
+const resetBtn = document.getElementById('resetBtn');
+
+let selectedReason = null;
 
 const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos'];
 
@@ -61,41 +64,7 @@ const passportData = {
   }
 };
 
-// Map for diplomatic seals by country
-const diplomaticSealMap = {
-  Arstotzka: [
-    'Photos/ArstotzkaDiplomaticSeal1.png',
-    'Photos/ArstotzkaDiplomaticSeal2.png'
-  ],
-  Antegria: [
-    'Photos/AntegriaDiplomaticSeal1.png',
-    'Photos/AntegriaDiplomaticSeal2.png'
-  ],
-  Impor: [
-    'Photos/ImporDiplomaticSeal1.png',
-    'Photos/ImporDiplomaticSeal2.png'
-  ],
-  Kolechia: [
-    'Photos/KolechiaDiplomaticSeal1.png',
-    'Photos/KolechiaDiplomaticSeal2.png'
-  ],
-  Obristan: [
-    'Photos/ObristanDiplomaticSeal1.png',
-    'Photos/ObristanDiplomaticSeal2.png'
-  ],
-  Republia: [
-    'Photos/RepubliaDiplomaticSeal1.png',
-    'Photos/RepubliaDiplomaticSeal2.png'
-  ],
-  "United Federation": [
-    'Photos/UFedDiplomaticSeal1.png',
-    'Photos/UFedDiplomaticSeal2.png'
-  ]
-};
-
-let selectedReason = null;
-
-// --- Checklist rendering functions ---
+// --- Utility Functions ---
 
 function addCheckbox(labelText, parent) {
   const wrapper = document.createElement('div');
@@ -114,6 +83,8 @@ function addCheckbox(labelText, parent) {
   wrapper.appendChild(label);
   parent.appendChild(wrapper);
 }
+
+// --- Checklist Rendering ---
 
 function updateChecklistDocuments(country, reason) {
   checklistDocuments.innerHTML = '';
@@ -166,6 +137,21 @@ function updateChecklistDocuments(country, reason) {
     });
   }
 
+  // Fingerprints infobox hide/show logic
+  const fingerprintsSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Fingerprints"]');
+  if (fingerprintsSidebarCheckbox) {
+    fingerprintsSidebarCheckbox.addEventListener('change', () => {
+      fingerprintsBox.classList.remove('complete');
+      if (fingerprintsSidebarCheckbox.checked) {
+        fingerprintsBox.classList.add('hidden');
+      } else {
+        if (selectedReason === 'Asylum') {
+          fingerprintsBox.classList.remove('hidden');
+        }
+      }
+    });
+  }
+
   // ID infobox hide/show logic
   const idSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="ID"]');
   if (idSidebarCheckbox) {
@@ -192,7 +178,9 @@ function updateChecklistDocuments(country, reason) {
         if (
           dropdown.value &&
           dropdown.value !== 'Country' &&
-          dropdown.value !== 'Arstotzka'
+          dropdown.value !== 'Arstotzka' &&
+          selectedReason !== 'Asylum' &&
+          selectedReason !== 'Diplomat'
         ) {
           accessPermitBox.classList.remove('hidden');
         }
@@ -200,6 +188,8 @@ function updateChecklistDocuments(country, reason) {
     });
   }
 }
+
+// --- Reason Checklist Rendering ---
 
 function updateChecklistReasons(country) {
   checklistReasons.innerHTML = '';
@@ -230,7 +220,8 @@ function updateChecklistReasons(country) {
       updateDiplomaticAuthBox(dropdown.value, selectedReason);
       updateWorkPassBox(selectedReason);
       updateAsylumGrantBox(selectedReason);
-      updateAccessPermitBox(dropdown.value, selectedReason); // <-- add this
+      updateAccessPermitBox(dropdown.value, selectedReason);
+      updateFingerprintsBox(selectedReason);
     });
 
     wrapper.appendChild(checkbox);
@@ -239,7 +230,7 @@ function updateChecklistReasons(country) {
   });
 }
 
-// --- Infobox logic ---
+// --- Infobox Checklist Generic Logic ---
 
 function setupInfoboxChecklistGeneric({
   box,
@@ -262,7 +253,7 @@ function setupInfoboxChecklistGeneric({
     }
   }
   checkboxes.forEach(cb => {
-    cb.onchange = onChecklistChange;
+    if (cb) cb.onchange = onChecklistChange;
   });
 
   // Sidebar checkbox logic
@@ -279,7 +270,7 @@ function setupInfoboxChecklistGeneric({
   }
 }
 
-// --- Infobox show/hide logic ---
+// --- Infobox Show/Hide Logic ---
 
 function updatePassportBox(country) {
   if (passportData[country]) {
@@ -314,6 +305,20 @@ function updatePolioBox(country) {
     });
   } else {
     polioBox.classList.add('hidden');
+  }
+}
+
+function updateFingerprintsBox(reason) {
+  if (reason === 'Asylum') {
+    fingerprintsBox.classList.remove('hidden');
+    setupInfoboxChecklistGeneric({
+      box: fingerprintsBox,
+      checklistIds: ['fp-fingerprints', 'fp-alias'],
+      sidebarSelector: '#checklist-documents input[data-label="Fingerprints"]',
+      shouldShow: () => selectedReason === 'Asylum'
+    });
+  } else {
+    fingerprintsBox.classList.add('hidden');
   }
 }
 
@@ -367,7 +372,40 @@ function updateAccessPermitBox(country, reason) {
   }
 }
 
+// Diplomatic Authorization infobox logic
+const diplomaticSealMap = {
+  Arstotzka: [
+    'Photos/ArstotzkaDiplomaticSeal1.png',
+    'Photos/ArstotzkaDiplomaticSeal2.png'
+  ],
+  Antegria: [
+    'Photos/AntegriaDiplomaticSeal1.png',
+    'Photos/AntegriaDiplomaticSeal2.png'
+  ],
+  Impor: [
+    'Photos/ImporDiplomaticSeal1.png',
+    'Photos/ImporDiplomaticSeal2.png'
+  ],
+  Kolechia: [
+    'Photos/KolechiaDiplomaticSeal1.png',
+    'Photos/KolechiaDiplomaticSeal2.png'
+  ],
+  Obristan: [
+    'Photos/ObristanDiplomaticSeal1.png',
+    'Photos/ObristanDiplomaticSeal2.png'
+  ],
+  Republia: [
+    'Photos/RepubliaDiplomaticSeal1.png',
+    'Photos/RepubliaDiplomaticSeal2.png'
+  ],
+  "United Federation": [
+    'Photos/UFedDiplomaticSeal1.png',
+    'Photos/UFedDiplomaticSeal2.png'
+  ]
+};
+
 function updateDiplomaticAuthBox(country, reason) {
+  const diplomaticAuthSeals = document.getElementById('diplomaticAuthSeals');
   if (reason === 'Diplomat' && country && country !== 'Country') {
     diplomaticAuthBox.classList.remove('hidden');
     // Set correct seals
@@ -443,25 +481,29 @@ function updateAsylumGrantBox(reason) {
 }
 
 // --- Dropdown logic ---
+
 dropdown.addEventListener('change', () => {
   const country = dropdown.value;
   updateChecklistDocuments(country, selectedReason);
   updateChecklistReasons(country);
   updatePassportBox(country);
   updatePolioBox(country);
+  updateFingerprintsBox(selectedReason);
   updateIdBox(country);
-  updateAccessPermitBox(country, selectedReason); // <-- pass both
+  updateAccessPermitBox(country, selectedReason);
   updateDiplomaticAuthBox(country, selectedReason);
   updateWorkPassBox(selectedReason);
   updateAsylumGrantBox(selectedReason);
 });
 
 // --- On load ---
+
 document.addEventListener('DOMContentLoaded', () => {
   checklistDocuments.classList.add('hidden');
   checklistReasons.classList.add('hidden');
   passportBox.classList.add('hidden');
   polioBox.classList.add('hidden');
+  fingerprintsBox.classList.add('hidden');
   idBox.classList.add('hidden');
   accessPermitBox.classList.add('hidden');
   diplomaticAuthBox.classList.add('hidden');
@@ -469,30 +511,25 @@ document.addEventListener('DOMContentLoaded', () => {
   asylumGrantBox.classList.add('hidden');
 });
 
-// Reset button logic
-const resetBtn = document.getElementById('resetBtn');
+// --- Reset Button ---
+
 resetBtn.addEventListener('click', () => {
-  // Reset dropdown
   dropdown.value = "Country";
-  // Hide all infoboxes
   passportBox.classList.add('hidden');
   polioBox.classList.add('hidden');
+  fingerprintsBox.classList.add('hidden');
   idBox.classList.add('hidden');
   accessPermitBox.classList.add('hidden');
   diplomaticAuthBox.classList.add('hidden');
   workPassBox.classList.add('hidden');
   asylumGrantBox.classList.add('hidden');
-  // Hide checklists
   checklistDocuments.classList.add('hidden');
   checklistReasons.classList.add('hidden');
-  // Uncheck all checkboxes in sidebar and infoboxes
   document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
     cb.checked = false;
   });
-  // Remove green border if present
   document.querySelectorAll('.info-box').forEach(box => {
     box.classList.remove('complete');
   });
-  // Reset selectedReason
   selectedReason = null;
 });
