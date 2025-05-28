@@ -13,6 +13,7 @@ const passportCities = document.getElementById('passportCities');
 const checklistDocuments = document.getElementById('checklist-documents');
 const checklistReasons = document.getElementById('checklist-reasons');
 const resetBtn = document.getElementById('resetBtn');
+const wantedPhotosBox = document.getElementById('wantedPhotosBox');
 
 let selectedReason = null;
 
@@ -480,6 +481,20 @@ function updateAsylumGrantBox(reason) {
   }
 }
 
+function updateWantedPhotosBox(country) {
+  if (country && country !== 'Country') {
+    wantedPhotosBox.classList.remove('hidden');
+    setupInfoboxChecklistGeneric({
+      box: wantedPhotosBox,
+      checklistIds: ['wp-notcriminal'],
+      sidebarSelector: '#checklist-documents input[data-label="Wanted Photos"]',
+      shouldShow: () => dropdown.value && dropdown.value !== 'Country'
+    });
+  } else {
+    wantedPhotosBox.classList.add('hidden');
+  }
+}
+
 // --- Dropdown logic ---
 
 dropdown.addEventListener('change', () => {
@@ -488,6 +503,7 @@ dropdown.addEventListener('change', () => {
   updateChecklistReasons(country);
   updatePassportBox(country);
   updatePolioBox(country);
+  updateWantedPhotosBox(country);
   updateFingerprintsBox(selectedReason);
   updateIdBox(country);
   updateAccessPermitBox(country, selectedReason);
@@ -503,6 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
   checklistReasons.classList.add('hidden');
   passportBox.classList.add('hidden');
   polioBox.classList.add('hidden');
+  wantedPhotosBox.classList.add('hidden');
   fingerprintsBox.classList.add('hidden');
   idBox.classList.add('hidden');
   accessPermitBox.classList.add('hidden');

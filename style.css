@@ -479,3 +479,11 @@ body {
 .fingerprints-checklist .checkbox-wrapper-47 {
   margin-bottom: 4px;
 }
+
+.wanted-photos-box {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  width: 180px;
+  min-width: 140px;
+  padding: 10px 10px 8px 10px;
+}
