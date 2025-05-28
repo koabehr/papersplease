@@ -175,13 +175,13 @@ function updatePassportBox(country) {
 
 // Infobox checklist logic for passport
 function setupInfoboxChecklist() {
-  const infoCheckboxIds = ['name', 'dob', 'sex', 'city', 'exp', 'face'];
+  const infoCheckboxIds = ['name', 'passport-id', 'dob', 'sex', 'city', 'exp', 'face'];
   const infoCheckboxes = infoCheckboxIds.map(id => document.getElementById(id));
   infoCheckboxes.forEach(cb => {
     cb.addEventListener('change', () => {
       const allChecked = infoCheckboxes.every(c => c.checked);
+      const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
       if (allChecked) {
-        const passportSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Passport"]');
         if (passportSidebarCheckbox) passportSidebarCheckbox.checked = true;
         passportBox.classList.add('hidden');
         infoCheckboxes.forEach(c => (c.checked = false));
