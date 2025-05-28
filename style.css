@@ -240,6 +240,17 @@ body {
   align-items: flex-start;
 }
 
+.infobox-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+  max-width: 320px; /* or whatever fits your infobox width + padding */
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Optionally set a max-height if you want the grid to scroll within a certain area */
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   body {
