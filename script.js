@@ -55,9 +55,22 @@ function updateChecklistDocuments(country, reason) {
       if (passportSidebarCheckbox.checked) {
         passportBox.classList.add('hidden');
       } else {
-        // Only show if a valid country is selected
         if (dropdown.value && dropdown.value !== 'Country' && passportData[dropdown.value]) {
           passportBox.classList.remove('hidden');
+        }
+      }
+    });
+  }
+
+  // Add event listener to Polio Vaccine checkbox to hide/re-show polio infobox
+  const polioSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Polio Vaccine"]');
+  if (polioSidebarCheckbox) {
+    polioSidebarCheckbox.addEventListener('change', () => {
+      if (polioSidebarCheckbox.checked) {
+        polioBox.classList.add('hidden');
+      } else {
+        if (dropdown.value && dropdown.value !== 'Country') {
+          polioBox.classList.remove('hidden');
         }
       }
     });
@@ -135,7 +148,7 @@ function updatePassportBox(country) {
   }
 }
 
-// Infobox checklist logic
+// Infobox checklist logic for passport
 function setupInfoboxChecklist() {
   const infoCheckboxIds = ['name', 'dob', 'sex', 'city', 'exp', 'face'];
   const infoCheckboxes = infoCheckboxIds.map(id => document.getElementById(id));
@@ -158,9 +171,39 @@ function setupInfoboxChecklist() {
       if (passportSidebarCheckbox.checked) {
         passportBox.classList.add('hidden');
       } else {
-        // Only show if a valid country is selected
         if (dropdown.value && dropdown.value !== 'Country' && passportData[dropdown.value]) {
           passportBox.classList.remove('hidden');
+        }
+      }
+    });
+  }
+}
+
+// Infobox checklist logic for polio
+function setupPolioInfoboxChecklist() {
+  const polioCheckboxIds = ['polio-name', 'polio-id', 'polio-exp'];
+  const polioCheckboxes = polioCheckboxIds.map(id => document.getElementById(id));
+  polioCheckboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const allChecked = polioCheckboxes.every(c => c.checked);
+      const polioSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Polio Vaccine"]');
+      if (allChecked) {
+        if (polioSidebarCheckbox) polioSidebarCheckbox.checked = true;
+        polioBox.classList.add('hidden');
+        polioCheckboxes.forEach(c => (c.checked = false));
+      }
+    });
+  });
+
+  // Also hide/re-show infobox if the polio vaccine checkbox is checked/deselected directly
+  const polioSidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Polio Vaccine"]');
+  if (polioSidebarCheckbox) {
+    polioSidebarCheckbox.addEventListener('change', () => {
+      if (polioSidebarCheckbox.checked) {
+        polioBox.classList.add('hidden');
+      } else {
+        if (dropdown.value && dropdown.value !== 'Country') {
+          polioBox.classList.remove('hidden');
         }
       }
     });
@@ -171,6 +214,7 @@ function setupInfoboxChecklist() {
 function updatePolioBox(country) {
   if (country && country !== 'Country') {
     polioBox.classList.remove('hidden');
+    setupPolioInfoboxChecklist();
   } else {
     polioBox.classList.add('hidden');
   }
