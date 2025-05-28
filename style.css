@@ -131,7 +131,7 @@ body {
 .main {
   flex: 1;
   padding: 20px 40px 60px;
-  margin-left: 12.5%;
+  margin-left: 6.25%; /* Was 12.5%, now half */
   text-align: center;
   font-size: 1.4em;
   letter-spacing: 0.05em;
@@ -157,7 +157,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 1em;
-  /* Offset by half the sidebar width (6.25%) for true center */
+  /* Offset by half the sidebar width for true center */
   position: relative;
   left: 6.25%;
   transform: translateX(0);
@@ -165,14 +165,14 @@ body {
 
 #main-title {
   text-align: center;
-  font-size: 3em;
+  font-size: 1.5em; /* Shrunk to half */
   margin: 0.5em 0;
   color: white;
 }
 
 #main-description {
   text-align: center;
-  font-size: 1.5em;
+  font-size: 0.75em; /* Shrunk to half */
   margin-bottom: 1em;
   color: rgba(255, 255, 255, 0.8);
 }
