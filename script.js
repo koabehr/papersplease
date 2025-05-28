@@ -405,9 +405,9 @@ function updateWorkPassBox(reason) {
   }
 }
 
-// Grant of Asylum infobox logic
 function updateAsylumGrantBox(reason) {
-  if (reason === 'Asylum') {
+  const country = dropdown.value;
+  if (reason === 'Asylum' && country && country !== 'Country') {
     asylumGrantBox.classList.remove('hidden');
     setupInfoboxChecklistGeneric({
       box: asylumGrantBox,
@@ -424,7 +424,7 @@ function updateAsylumGrantBox(reason) {
         'asylum-expiration'
       ],
       sidebarSelector: '#checklist-documents input[data-label="Grant of Asylum"]',
-      shouldShow: () => selectedReason === 'Asylum'
+      shouldShow: () => selectedReason === 'Asylum' && dropdown.value && dropdown.value !== 'Country'
     });
   } else {
     asylumGrantBox.classList.add('hidden');
