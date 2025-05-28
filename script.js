@@ -11,6 +11,7 @@ const checklistReasons = document.getElementById('checklist-reasons');
 const diplomaticAuthBox = document.getElementById('diplomaticAuthBox');
 const diplomaticAuthSeals = document.getElementById('diplomaticAuthSeals');
 const workPassBox = document.getElementById('workPassBox');
+const asylumGrantBox = document.getElementById('asylumGrantBox');
 
 const baseItems = ['Passport', 'Polio Vaccine', 'Wanted Photos'];
 
@@ -222,6 +223,7 @@ function updateChecklistReasons(country) {
       // Update Diplomatic Authorization infobox when reason changes
       updateDiplomaticAuthBox(dropdown.value, selectedReason);
       updateWorkPassBox(selectedReason); // <-- Add this line
+      updateAsylumGrantBox(selectedReason); // <-- Grant of Asylum logic added here
     });
 
     wrapper.appendChild(checkbox);
@@ -403,6 +405,32 @@ function updateWorkPassBox(reason) {
   }
 }
 
+// Grant of Asylum infobox logic
+function updateAsylumGrantBox(reason) {
+  if (reason === 'Asylum') {
+    asylumGrantBox.classList.remove('hidden');
+    setupInfoboxChecklistGeneric({
+      box: asylumGrantBox,
+      checklistIds: [
+        'asylum-seal',
+        'asylum-name',
+        'asylum-photo',
+        'asylum-nationality',
+        'asylum-id',
+        'asylum-dob',
+        'asylum-weight',
+        'asylum-height',
+        'asylum-fingerprints',
+        'asylum-expiration'
+      ],
+      sidebarSelector: '#checklist-documents input[data-label="Grant of Asylum"]',
+      shouldShow: () => selectedReason === 'Asylum'
+    });
+  } else {
+    asylumGrantBox.classList.add('hidden');
+  }
+}
+
 // --- Dropdown logic ---
 dropdown.addEventListener('change', () => {
   const country = dropdown.value;
@@ -413,7 +441,8 @@ dropdown.addEventListener('change', () => {
   updateIdBox(country);
   updateAccessPermitBox(country);
   updateDiplomaticAuthBox(country, selectedReason);
-  updateWorkPassBox(selectedReason); // <-- Add this line
+  updateWorkPassBox(selectedReason);
+  updateAsylumGrantBox(selectedReason);
 });
 
 // --- On load ---
@@ -425,7 +454,8 @@ document.addEventListener('DOMContentLoaded', () => {
   idBox.classList.add('hidden');
   accessPermitBox.classList.add('hidden');
   diplomaticAuthBox.classList.add('hidden');
-  workPassBox.classList.add('hidden'); // <-- Add this line
+  workPassBox.classList.add('hidden');
+  asylumGrantBox.classList.add('hidden');
 });
 
 // Reset button logic
@@ -439,7 +469,8 @@ resetBtn.addEventListener('click', () => {
   idBox.classList.add('hidden');
   accessPermitBox.classList.add('hidden');
   diplomaticAuthBox.classList.add('hidden');
-  workPassBox.classList.add('hidden'); // <-- Add this line
+  workPassBox.classList.add('hidden');
+  asylumGrantBox.classList.add('hidden');
   // Hide checklists
   checklistDocuments.classList.add('hidden');
   checklistReasons.classList.add('hidden');
