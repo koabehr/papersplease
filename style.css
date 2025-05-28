@@ -26,7 +26,7 @@ body {
 /* Sidebar styles */
 .sidebar {
   width: 12.5%;
-  background: rgb(114, 114, 114);
+  background: rgb(65, 65, 65);
   color: white;
   padding: 20px 10px;
   display: flex;
@@ -183,7 +183,7 @@ body {
   flex-direction: column;
   align-items: center; /* center align photo and text */
   gap: 12px;
-  background-color: rgb(114, 114, 114);
+  background-color: rgb(65, 65, 65);
   border-radius: 8px;
   padding: 16px;
   color: white;
