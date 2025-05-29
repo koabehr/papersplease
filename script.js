@@ -555,3 +555,9 @@ resetBtn.addEventListener('click', () => {
   });
   selectedReason = null;
 });
+
+document.querySelectorAll('.api-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    btn.classList.toggle('active');
+  });
+});

@@ -482,88 +482,55 @@ body {
 /* Custom Access Permit Inner Infobox */
 .custom-access-permit-inner-box {
   position: relative;
-  width: 400px; /* Adjust to match your image's width */
-  height: 270px; /* Adjust to match your image's height */
-  padding: 0;
+  width: 400px;   /* Set to your image's width */
+  height: 270px;  /* Set to your image's height */
+  margin: 40px auto;
   background: none;
   box-shadow: none;
-  margin: 20px auto;
+  border: none;
+  padding: 0;
 }
 
-.access-permit-inner-bg {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.access-permit-inner-bg img {
+.custom-access-permit-inner-box .api-bg {
   width: 100%;
   height: 100%;
   display: block;
   border-radius: 8px;
+  pointer-events: none;
+  user-select: none;
 }
 
-.access-permit-inner-overlay {
+/* Overlayed buttons */
+.api-btn {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* So only checkboxes are clickable */
-  font-family: 'VT323', monospace;
-  font-size: 1.2em;
-}
-
-.api-row {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  pointer-events: auto; /* Allow interaction */
-}
-
-.api-label {
+  background: rgba(0,0,0,0.0);
   color: #fff;
   font-family: 'VT323', monospace;
-  font-size: 1.1em;
-  letter-spacing: 0.05em;
-  margin-left: 6px;
-  margin-right: 6px;
+  font-size: 1.2em;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: color 0.2s, background 0.2s;
+  border-radius: 4px;
+  min-width: 0;
+  min-height: 0;
   user-select: none;
-  white-space: nowrap;
 }
 
-.api-label-center {
-  width: 100%;
-  text-align: center;
-  justify-content: center;
-  margin: 0 auto;
+.api-btn.active {
+  background: #2cbc63;
+  color: #fff;
 }
 
-/* Hide default checkbox, use label for click */
-.api-row input[type="checkbox"] {
-  margin-right: 6px;
-  accent-color: #2cbc63;
-  width: 18px;
-  height: 18px;
-}
-
-/* --- Positioning for each line (adjust as needed for your image) --- */
-
-/* Top Center: NAME */
-.api-row-name {
-  top: 32px;
-  left: 0;
-  width: 100%;
-  justify-content: center;
-}
-
-/* Left column */
-.api-row-nationality { top: 72px; left: 32px; }
-.api-row-purpose     { top: 108px; left: 32px; }
-.api-row-height      { top: 144px; left: 32px; }
-.api-row-appearance  { top: 180px; left: 32px; }
-
-/* Right column */
-.api-row-id      { top: 72px; right: 32px; flex-direction: row-reverse; }
-.api-row-duration{ top: 108px; right: 32px; flex-direction: row-reverse; }
-.api-row-weight  { top: 144px; right: 32px; flex-direction: row-reverse; }
-.api-row-enterby { top: 180px; right: 32px; flex-direction: row-reverse; }
+/* Pixel-perfect placement (adjust these for your image!) */
+.api-btn-name      { top: 32px;  left: 50%; transform: translateX(-50%); width: 180px; text-align: center; }
+.api-btn-nationality { top: 72px;  left: 32px;  width: 120px; text-align: left; }
+.api-btn-purpose     { top: 108px; left: 32px;  width: 120px; text-align: left; }
+.api-btn-height      { top: 144px; left: 32px;  width: 120px; text-align: left; }
+.api-btn-appearance  { top: 180px; left: 32px;  width: 180px; text-align: left; }
+.api-btn-id          { top: 72px;  right: 32px; width: 120px; text-align: left; }
+.api-btn-duration    { top: 108px; right: 32px; width: 120px; text-align: left; }
+.api-btn-weight      { top: 144px; right: 32px; width: 120px; text-align: left; }
+.api-btn-enterby     { top: 180px; right: 32px; width: 120px; text-align: left; }
