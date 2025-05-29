@@ -479,23 +479,27 @@ body {
   }
 }
 
-/* Custom Access Permit Inner Infobox (pixel-perfect, no default infobox styles) */
+/* Custom Access Permit Inner Infobox (no size restriction, no scrollbars) */
 .custom-access-permit-inner-box {
   position: relative;
-  width: 400px;   /* Use your image's actual width */
-  height: 270px;  /* Use your image's actual height */
   margin: 40px auto;
   background: none;
   box-shadow: none;
   border: none;
   padding: 0;
+  /* Remove any width/height restriction */
+  width: auto;
+  height: auto;
+  overflow: visible;
 }
 
 .custom-access-permit-inner-box .api-bg {
   position: absolute;
   top: 0; left: 0;
-  width: 400px;   /* Match natural image size */
-  height: 270px;
+  width: auto;
+  height: auto;
+  max-width: none;
+  max-height: none;
   object-fit: none;
   display: block;
   border-radius: 8px;
