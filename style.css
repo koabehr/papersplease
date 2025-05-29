@@ -90,7 +90,7 @@ body {
 
 .checkbox-wrapper-47 label {
   position: relative;
-  padding-left: 2em;
+  padding-left: 2em; /* This is for the custom checkbox box */
   padding-right: 1em;
   line-height: 2;
   cursor: pointer;
@@ -235,7 +235,6 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 18px; /* Uniform left margin */
   box-sizing: border-box;
 }
 

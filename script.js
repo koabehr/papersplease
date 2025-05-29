@@ -200,6 +200,9 @@ function updateChecklistReasons(country) {
   }
   checklistReasons.classList.remove('hidden');
   Object.keys(reasonMap).forEach(reason => {
+    // Skip Diplomat if Arstotzka is selected
+    if (country === 'Arstotzka' && reason === 'Diplomat') return;
+
     const wrapper = document.createElement('div');
     wrapper.className = 'checkbox-wrapper-47';
 
