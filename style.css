@@ -479,11 +479,10 @@ body {
   }
 }
 
-/* Custom Access Permit Inner Infobox */
 .custom-access-permit-inner-box {
   position: relative;
-  width: 400px;   /* Set to your image's width */
-  height: 270px;  /* Set to your image's height */
+  width: 400px;   /* Use your image's actual width */
+  height: 270px;  /* Use your image's actual height */
   margin: 40px auto;
   background: none;
   box-shadow: none;
@@ -492,21 +491,24 @@ body {
 }
 
 .custom-access-permit-inner-box .api-bg {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  top: 0; left: 0;
+  width: 400px;   /* Match natural image size */
+  height: 270px;
+  object-fit: none;
   display: block;
   border-radius: 8px;
   pointer-events: none;
   user-select: none;
+  z-index: 1;
 }
 
-/* Overlayed buttons */
 .api-btn {
   position: absolute;
   background: rgba(0,0,0,0.0);
   color: #fff;
   font-family: 'VT323', monospace;
-  font-size: 1.2em;
+  font-size: 1em; /* Smaller text */
   border: none;
   outline: none;
   cursor: pointer;
@@ -517,6 +519,7 @@ body {
   min-width: 0;
   min-height: 0;
   user-select: none;
+  z-index: 2;
 }
 
 .api-btn.active {
@@ -524,13 +527,12 @@ body {
   color: #fff;
 }
 
-/* Pixel-perfect placement (adjust these for your image!) */
-.api-btn-name      { top: 32px;  left: 50%; transform: translateX(-50%); width: 180px; text-align: center; }
-.api-btn-nationality { top: 72px;  left: 32px;  width: 120px; text-align: left; }
-.api-btn-purpose     { top: 108px; left: 32px;  width: 120px; text-align: left; }
-.api-btn-height      { top: 144px; left: 32px;  width: 120px; text-align: left; }
-.api-btn-appearance  { top: 180px; left: 32px;  width: 180px; text-align: left; }
-.api-btn-id          { top: 72px;  right: 32px; width: 120px; text-align: left; }
-.api-btn-duration    { top: 108px; right: 32px; width: 120px; text-align: left; }
-.api-btn-weight      { top: 144px; right: 32px; width: 120px; text-align: left; }
-.api-btn-enterby     { top: 180px; right: 32px; width: 120px; text-align: left; }
+.api-btn-name      { top: 24px;  left: 50%; transform: translateX(-50%); width: 140px; text-align: center; }
+.api-btn-nationality { top: 60px;  left: 28px;  width: 100px; text-align: left; }
+.api-btn-purpose     { top: 90px;  left: 28px;  width: 100px; text-align: left; }
+.api-btn-height      { top: 120px; left: 28px;  width: 100px; text-align: left; }
+.api-btn-appearance  { top: 150px; left: 28px;  width: 160px; text-align: left; }
+.api-btn-id          { top: 60px;  right: 28px; width: 100px; text-align: left; }
+.api-btn-duration    { top: 90px;  right: 28px; width: 100px; text-align: left; }
+.api-btn-weight      { top: 120px; right: 28px; width: 100px; text-align: left; }
+.api-btn-enterby     { top: 180px; right: 28px; width: 100px; text-align: left; }
