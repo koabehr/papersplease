@@ -478,3 +478,92 @@ body {
     gap: 0;
   }
 }
+
+/* Custom Access Permit Inner Infobox */
+.custom-access-permit-inner-box {
+  position: relative;
+  width: 400px; /* Adjust to match your image's width */
+  height: 270px; /* Adjust to match your image's height */
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  margin: 20px auto;
+}
+
+.access-permit-inner-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.access-permit-inner-bg img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 8px;
+}
+
+.access-permit-inner-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* So only checkboxes are clickable */
+  font-family: 'VT323', monospace;
+  font-size: 1.2em;
+}
+
+.api-row {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  pointer-events: auto; /* Allow interaction */
+}
+
+.api-label {
+  color: #fff;
+  font-family: 'VT323', monospace;
+  font-size: 1.1em;
+  letter-spacing: 0.05em;
+  margin-left: 6px;
+  margin-right: 6px;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.api-label-center {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* Hide default checkbox, use label for click */
+.api-row input[type="checkbox"] {
+  margin-right: 6px;
+  accent-color: #2cbc63;
+  width: 18px;
+  height: 18px;
+}
+
+/* --- Positioning for each line (adjust as needed for your image) --- */
+
+/* Top Center: NAME */
+.api-row-name {
+  top: 32px;
+  left: 0;
+  width: 100%;
+  justify-content: center;
+}
+
+/* Left column */
+.api-row-nationality { top: 72px; left: 32px; }
+.api-row-purpose     { top: 108px; left: 32px; }
+.api-row-height      { top: 144px; left: 32px; }
+.api-row-appearance  { top: 180px; left: 32px; }
+
+/* Right column */
+.api-row-id      { top: 72px; right: 32px; flex-direction: row-reverse; }
+.api-row-duration{ top: 108px; right: 32px; flex-direction: row-reverse; }
+.api-row-weight  { top: 144px; right: 32px; flex-direction: row-reverse; }
+.api-row-enterby { top: 180px; right: 32px; flex-direction: row-reverse; }
