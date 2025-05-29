@@ -506,7 +506,7 @@ body {
 .api-btn {
   position: absolute;
   background: rgba(0,0,0,0.0);
-  color: #fff;
+  color: #556955;
   font-family: 'VT323', monospace;
   font-size: 1em; /* Smaller text */
   border: none;
