@@ -235,7 +235,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 18px; /* Add this for uniform left margin */
+  margin-left: 18px; /* Uniform left margin */
   box-sizing: border-box;
 }
 

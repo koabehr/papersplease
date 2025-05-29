@@ -482,7 +482,11 @@ function updateAsylumGrantBox(reason) {
 }
 
 function updateWantedPhotosBox(country) {
-  if (country && country !== 'Country') {
+  const sidebarCheckbox = document.querySelector('#checklist-documents input[data-label="Wanted Photos"]');
+  // Hide if no valid country or if checklist is marked complete
+  if (!country || country === 'Country' || (sidebarCheckbox && sidebarCheckbox.checked)) {
+    wantedPhotosBox.classList.add('hidden');
+  } else {
     wantedPhotosBox.classList.remove('hidden');
     setupInfoboxChecklistGeneric({
       box: wantedPhotosBox,
@@ -490,8 +494,6 @@ function updateWantedPhotosBox(country) {
       sidebarSelector: '#checklist-documents input[data-label="Wanted Photos"]',
       shouldShow: () => dropdown.value && dropdown.value !== 'Country'
     });
-  } else {
-    wantedPhotosBox.classList.add('hidden');
   }
 }
 
